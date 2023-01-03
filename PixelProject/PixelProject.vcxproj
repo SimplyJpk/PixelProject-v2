@@ -1,257 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Release [Debug]|x64">
-      <Configuration>Release [Debug]</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|x64">
-      <Configuration>Debug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|x64">
-      <Configuration>Release</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-  </ItemGroup>
-  <PropertyGroup>
-    <DisableFastUpToDateCheck>True</DisableFastUpToDateCheck>
-  </PropertyGroup>
-  <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
-    <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{530e0a7d-4d12-4c07-b00b-9c8093433d4c}</ProjectGuid>
-    <RootNamespace>PixelProject</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>PixelProject</ProjectName>
-  </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release [Debug]|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="Shared">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release [Debug]|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\PixelProject\Scripts;$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release [Debug]|x64'">
-    <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\PixelProject\Scripts;$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\PixelProject\Scripts;$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DEBUG_GAME;GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Includes\;$(SolutionDir)Includes\SDL2\include;$(SolutionDir)Includes\imgui_sdl-master;$(SolutionDir)Includes\imgui-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp20</LanguageStandard>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\x64;$(SolutionDir)Includes\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;glew32s.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <PostBuildEvent>
-      <Message>
-      </Message>
-      <Command>XCOPY "$(SolutionDir)$(ProjectName)\shaders" "$(TargetDir)shaders\" /S/E /Y</Command>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release [Debug]|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DEBUG_GAME;GLEW_STATIC;_CONSOLE;%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Includes\;$(SolutionDir)Includes\SDL2\include;$(SolutionDir)Includes\imgui_sdl-master;$(SolutionDir)Includes\imgui-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp20</LanguageStandard>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\x64;$(SolutionDir)Includes\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;glew32s.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <PostBuildEvent>
-      <Message>
-      </Message>
-      <Command>XCOPY "$(SolutionDir)$(ProjectName)\shaders" "$(TargetDir)shaders\" /S/E /Y</Command>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>DEBUG_GAME;GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Includes\;$(SolutionDir)Includes\SDL2\include;$(SolutionDir)Includes\imgui_sdl-master;$(SolutionDir)Includes\imgui-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp20</LanguageStandard>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\x64;$(SolutionDir)Includes\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;glew32s.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <IgnoreAllDefaultLibraries>
-      </IgnoreAllDefaultLibraries>
-    </Link>
-    <PostBuildEvent>
-      <Message>
-      </Message>
-      <Command>XCOPY "$(SolutionDir)$(ProjectName)\shaders" "$(TargetDir)shaders\" /S/E /Y
-XCOPY "$(SolutionDir)$(ProjectName)\textures" "$(TargetDir)textures\" /S/E /Y</Command>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD.cpp" />
-    <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_avx2.cpp" />
-    <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_avx512.cpp" />
-    <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_internal.cpp" />
-    <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_neon.cpp" />
-    <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_sse2.cpp" />
-    <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_sse41.cpp" />
-    <ClCompile Include="..\Includes\imgui-master\backends\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="..\Includes\imgui-master\backends\imgui_impl_sdl.cpp" />
-    <ClCompile Include="..\Includes\imgui-master\imgui.cpp" />
-    <ClCompile Include="..\Includes\imgui-master\imgui_draw.cpp" />
-    <ClCompile Include="..\Includes\imgui-master\imgui_tables.cpp" />
-    <ClCompile Include="..\Includes\imgui-master\imgui_widgets.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Scripts\Game.cpp" />
-    <ClCompile Include="Scripts\Interfaces\ISerialize.cpp" />
-    <ClCompile Include="Scripts\Math\Vec2\IVec2.cpp" />
-    <ClCompile Include="Scripts\Math\Vec2\SVec2.cpp" />
-    <ClCompile Include="Scripts\Math\Vec2\Vec2.cpp" />
-    <ClCompile Include="Scripts\UI\UIManager.cpp" />
-    <ClCompile Include="Scripts\Utility\Console.cpp" />
-    <ClCompile Include="SDL_FontCache\SDL_FontCache.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD.h" />
-    <ClInclude Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_internal.h" />
-    <ClInclude Include="..\Includes\imgui-master\backends\imgui_impl_sdl.h" />
-    <ClInclude Include="..\Includes\imgui-master\imconfig.h" />
-    <ClInclude Include="..\Includes\imgui-master\imgui.h" />
-    <ClInclude Include="..\Includes\imgui-master\imgui_internal.h" />
-    <ClInclude Include="..\Includes\imgui-master\imstb_rectpack.h" />
-    <ClInclude Include="..\Includes\imgui-master\imstb_textedit.h" />
-    <ClInclude Include="..\Includes\imgui-master\imstb_truetype.h" />
-    <ClInclude Include="Scripts\Config\ConfigFile.h" />
-    <ClInclude Include="Scripts\Config\GameSettings.h" />
-    <ClInclude Include="Scripts\Game.h" />
-    <ClInclude Include="Scripts\Global\Constants.h" />
-    <ClInclude Include="Scripts\Global\Defines.h" />
-    <ClInclude Include="Scripts\Input\InputKeyCodes.h" />
-    <ClInclude Include="Scripts\Interfaces\ISerialize.h" />
-    <ClInclude Include="Scripts\Macros\InlineReturn.h" />
-    <ClInclude Include="Scripts\Math\Math.h" />
-    <ClInclude Include="Scripts\Math\Vec2\IVec2.h" />
-    <ClInclude Include="Scripts\Math\Vec2\SVec2.h" />
-    <ClInclude Include="Scripts\Math\Vec2\Vec2.h" />
-    <ClInclude Include="Scripts\UI\UIManager.h" />
-    <ClInclude Include="Scripts\Utility\BitWise.h" />
-    <ClInclude Include="Scripts\Utility\Console.h" />
-    <ClInclude Include="Scripts\Utility\FileIO.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="shaders\default.frag" />
-    <None Include="shaders\default.vert" />
-    <None Include="shaders\orthoUI.frag" />
-    <None Include="shaders\orthoUI.vert" />
-    <None Include="shaders\orthoWorld.frag" />
-    <None Include="shaders\orthoWorld.vert" />
-    <None Include="shaders\post\bloom.frag" />
-    <None Include="shaders\post\bloom.vert" />
-    <None Include="shaders\post\blur.frag" />
-    <None Include="shaders\post\blur.vert" />
-    <None Include="shaders\rendertarget\default.frag" />
-    <None Include="shaders\rendertarget\default.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="textures\brick.png" />
-  </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\sdl2_image.nuget.redist.2.0.5\build\native\sdl2_image.nuget.redist.targets" Condition="Exists('..\packages\sdl2_image.nuget.redist.2.0.5\build\native\sdl2_image.nuget.redist.targets')" />
-    <Import Project="..\packages\sdl2_image.nuget.2.0.5\build\native\sdl2_image.nuget.targets" Condition="Exists('..\packages\sdl2_image.nuget.2.0.5\build\native\sdl2_image.nuget.targets')" />
-    <Import Project="..\packages\sdl2_ttf.nuget.redist.2.0.15\build\native\sdl2_ttf.nuget.redist.targets" Condition="Exists('..\packages\sdl2_ttf.nuget.redist.2.0.15\build\native\sdl2_ttf.nuget.redist.targets')" />
-    <Import Project="..\packages\sdl2_ttf.nuget.2.0.15\build\native\sdl2_ttf.nuget.targets" Condition="Exists('..\packages\sdl2_ttf.nuget.2.0.15\build\native\sdl2_ttf.nuget.targets')" />
-    <Import Project="..\packages\cereal.1.0.0\build\native\cereal.targets" Condition="Exists('..\packages\cereal.1.0.0\build\native\cereal.targets')" />
-    <Import Project="..\packages\sdl2.nuget.redist.2.0.14\build\native\sdl2.nuget.redist.targets" Condition="Exists('..\packages\sdl2.nuget.redist.2.0.14\build\native\sdl2.nuget.redist.targets')" />
-    <Import Project="..\packages\sdl2.nuget.2.0.14\build\native\sdl2.nuget.targets" Condition="Exists('..\packages\sdl2.nuget.2.0.14\build\native\sdl2.nuget.targets')" />
-    <Import Project="..\packages\boost.1.76.0.0\build\boost.targets" Condition="Exists('..\packages\boost.1.76.0.0\build\boost.targets')" />
-    <Import Project="..\packages\boost_atomic-vc142.1.76.0.0\build\boost_atomic-vc142.targets" Condition="Exists('..\packages\boost_atomic-vc142.1.76.0.0\build\boost_atomic-vc142.targets')" />
-    <Import Project="..\packages\boost_chrono-vc142.1.76.0.0\build\boost_chrono-vc142.targets" Condition="Exists('..\packages\boost_chrono-vc142.1.76.0.0\build\boost_chrono-vc142.targets')" />
-    <Import Project="..\packages\boost_container-vc142.1.76.0.0\build\boost_container-vc142.targets" Condition="Exists('..\packages\boost_container-vc142.1.76.0.0\build\boost_container-vc142.targets')" />
-    <Import Project="..\packages\boost_coroutine-vc142.1.76.0.0\build\boost_coroutine-vc142.targets" Condition="Exists('..\packages\boost_coroutine-vc142.1.76.0.0\build\boost_coroutine-vc142.targets')" />
-    <Import Project="..\packages\boost_date_time-vc142.1.76.0.0\build\boost_date_time-vc142.targets" Condition="Exists('..\packages\boost_date_time-vc142.1.76.0.0\build\boost_date_time-vc142.targets')" />
-    <Import Project="..\packages\boost_exception-vc142.1.76.0.0\build\boost_exception-vc142.targets" Condition="Exists('..\packages\boost_exception-vc142.1.76.0.0\build\boost_exception-vc142.targets')" />
-    <Import Project="..\packages\boost_filesystem-vc142.1.76.0.0\build\boost_filesystem-vc142.targets" Condition="Exists('..\packages\boost_filesystem-vc142.1.76.0.0\build\boost_filesystem-vc142.targets')" />
-    <Import Project="..\packages\boost_thread-vc142.1.76.0.0\build\boost_thread-vc142.targets" Condition="Exists('..\packages\boost_thread-vc142.1.76.0.0\build\boost_thread-vc142.targets')" />
-  </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <Error Condition="!Exists('..\packages\sdl2_image.nuget.redist.2.0.5\build\native\sdl2_image.nuget.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_image.nuget.redist.2.0.5\build\native\sdl2_image.nuget.redist.targets'))" />
-    <Error Condition="!Exists('..\packages\sdl2_image.nuget.2.0.5\build\native\sdl2_image.nuget.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_image.nuget.2.0.5\build\native\sdl2_image.nuget.targets'))" />
-    <Error Condition="!Exists('..\packages\sdl2_ttf.nuget.redist.2.0.15\build\native\sdl2_ttf.nuget.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_ttf.nuget.redist.2.0.15\build\native\sdl2_ttf.nuget.redist.targets'))" />
-    <Error Condition="!Exists('..\packages\sdl2_ttf.nuget.2.0.15\build\native\sdl2_ttf.nuget.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_ttf.nuget.2.0.15\build\native\sdl2_ttf.nuget.targets'))" />
-    <Error Condition="!Exists('..\packages\cereal.1.0.0\build\native\cereal.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cereal.1.0.0\build\native\cereal.targets'))" />
-    <Error Condition="!Exists('..\packages\sdl2.nuget.redist.2.0.14\build\native\sdl2.nuget.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2.nuget.redist.2.0.14\build\native\sdl2.nuget.redist.targets'))" />
-    <Error Condition="!Exists('..\packages\sdl2.nuget.2.0.14\build\native\sdl2.nuget.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2.nuget.2.0.14\build\native\sdl2.nuget.targets'))" />
-    <Error Condition="!Exists('..\packages\boost.1.76.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.76.0.0\build\boost.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_atomic-vc142.1.76.0.0\build\boost_atomic-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_atomic-vc142.1.76.0.0\build\boost_atomic-vc142.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_chrono-vc142.1.76.0.0\build\boost_chrono-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_chrono-vc142.1.76.0.0\build\boost_chrono-vc142.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_container-vc142.1.76.0.0\build\boost_container-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_container-vc142.1.76.0.0\build\boost_container-vc142.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_coroutine-vc142.1.76.0.0\build\boost_coroutine-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_coroutine-vc142.1.76.0.0\build\boost_coroutine-vc142.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_date_time-vc142.1.76.0.0\build\boost_date_time-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_date_time-vc142.1.76.0.0\build\boost_date_time-vc142.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_exception-vc142.1.76.0.0\build\boost_exception-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_exception-vc142.1.76.0.0\build\boost_exception-vc142.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_filesystem-vc142.1.76.0.0\build\boost_filesystem-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_filesystem-vc142.1.76.0.0\build\boost_filesystem-vc142.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_thread-vc142.1.76.0.0\build\boost_thread-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_thread-vc142.1.76.0.0\build\boost_thread-vc142.targets'))" />
-  </Target>
+    <ItemGroup Label="ProjectConfigurations">
+        <ProjectConfiguration Include="Release [Debug]|x64">
+            <Configuration>Release [Debug]</Configuration>
+            <Platform>x64</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Debug|x64">
+            <Configuration>Debug</Configuration>
+            <Platform>x64</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Release|x64">
+            <Configuration>Release</Configuration>
+            <Platform>x64</Platform>
+        </ProjectConfiguration>
+    </ItemGroup>
+    <PropertyGroup>
+        <DisableFastUpToDateCheck>True</DisableFastUpToDateCheck>
+    </PropertyGroup>
+    <PropertyGroup Label="Globals">
+        <VCProjectVersion>16.0</VCProjectVersion>
+        <Keyword>Win32Proj</Keyword>
+        <ProjectGuid>{530e0a7d-4d12-4c07-b00b-9c8093433d4c}</ProjectGuid>
+        <RootNamespace>PixelProject</RootNamespace>
+        <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+        <ProjectName>PixelProject</ProjectName>
+    </PropertyGroup>
+    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+        <ConfigurationType>Application</ConfigurationType>
+        <UseDebugLibraries>true</UseDebugLibraries>
+        <PlatformToolset>v143</PlatformToolset>
+        <CharacterSet>Unicode</CharacterSet>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release [Debug]|x64'" Label="Configuration">
+        <ConfigurationType>Application</ConfigurationType>
+        <UseDebugLibraries>true</UseDebugLibraries>
+        <PlatformToolset>v143</PlatformToolset>
+        <CharacterSet>Unicode</CharacterSet>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+        <ConfigurationType>Application</ConfigurationType>
+        <UseDebugLibraries>false</UseDebugLibraries>
+        <PlatformToolset>v143</PlatformToolset>
+        <WholeProgramOptimization>true</WholeProgramOptimization>
+        <CharacterSet>Unicode</CharacterSet>
+    </PropertyGroup>
+    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
+    <ImportGroup Label="ExtensionSettings">
+    </ImportGroup>
+    <ImportGroup Label="Shared">
+    </ImportGroup>
+    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+        <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform"/>
+    </ImportGroup>
+    <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release [Debug]|x64'" Label="PropertySheets">
+        <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform"/>
+    </ImportGroup>
+    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+        <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform"/>
+    </ImportGroup>
+    <PropertyGroup Label="UserMacros"/>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+        <LinkIncremental>true</LinkIncremental>
+        <IncludePath>$(SolutionDir)\PixelProject\Scripts;$(IncludePath)</IncludePath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release [Debug]|x64'">
+        <LinkIncremental>true</LinkIncremental>
+        <IncludePath>$(SolutionDir)\PixelProject\Scripts;$(IncludePath)</IncludePath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+        <LinkIncremental>true</LinkIncremental>
+        <IncludePath>$(SolutionDir)\PixelProject\Scripts;$(IncludePath)</IncludePath>
+    </PropertyGroup>
+    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+        <ClCompile>
+            <WarningLevel>Level3</WarningLevel>
+            <SDLCheck>true</SDLCheck>
+            <PreprocessorDefinitions>DEBUG_GAME;GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
+            <ConformanceMode>true</ConformanceMode>
+            <AdditionalIncludeDirectories>$(SolutionDir)Includes\;$(SolutionDir)Includes\SDL2\include;$(SolutionDir)Includes\imgui_sdl-master;$(SolutionDir)Includes\imgui-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+            <LanguageStandard>stdcpp20</LanguageStandard>
+            <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+            <MultiProcessorCompilation>true</MultiProcessorCompilation>
+        </ClCompile>
+        <Link>
+            <SubSystem>Console</SubSystem>
+            <GenerateDebugInformation>true</GenerateDebugInformation>
+            <AdditionalLibraryDirectories>$(SolutionDir)lib\x64;$(SolutionDir)Includes\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+            <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;glew32s.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+        </Link>
+        <PostBuildEvent>
+            <Message>
+            </Message>
+            <Command>XCOPY "$(SolutionDir)$(ProjectName)\shaders" "$(TargetDir)shaders\" /S/E /Y</Command>
+        </PostBuildEvent>
+    </ItemDefinitionGroup>
+    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release [Debug]|x64'">
+        <ClCompile>
+            <WarningLevel>Level3</WarningLevel>
+            <SDLCheck>true</SDLCheck>
+            <PreprocessorDefinitions>DEBUG_GAME;GLEW_STATIC;_CONSOLE;%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
+            <ConformanceMode>true</ConformanceMode>
+            <AdditionalIncludeDirectories>$(SolutionDir)Includes\;$(SolutionDir)Includes\SDL2\include;$(SolutionDir)Includes\imgui_sdl-master;$(SolutionDir)Includes\imgui-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+            <LanguageStandard>stdcpp20</LanguageStandard>
+            <MultiProcessorCompilation>true</MultiProcessorCompilation>
+        </ClCompile>
+        <Link>
+            <SubSystem>Console</SubSystem>
+            <GenerateDebugInformation>true</GenerateDebugInformation>
+            <AdditionalLibraryDirectories>$(SolutionDir)lib\x64;$(SolutionDir)Includes\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+            <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;glew32s.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+        </Link>
+        <PostBuildEvent>
+            <Message>
+            </Message>
+            <Command>XCOPY "$(SolutionDir)$(ProjectName)\shaders" "$(TargetDir)shaders\" /S/E /Y</Command>
+        </PostBuildEvent>
+    </ItemDefinitionGroup>
+    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+        <ClCompile>
+            <WarningLevel>Level3</WarningLevel>
+            <FunctionLevelLinking>true</FunctionLevelLinking>
+            <IntrinsicFunctions>true</IntrinsicFunctions>
+            <SDLCheck>true</SDLCheck>
+            <PreprocessorDefinitions>DEBUG_GAME;GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
+            <ConformanceMode>true</ConformanceMode>
+            <AdditionalIncludeDirectories>$(SolutionDir)Includes\;$(SolutionDir)Includes\SDL2\include;$(SolutionDir)Includes\imgui_sdl-master;$(SolutionDir)Includes\imgui-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+            <LanguageStandard>stdcpp20</LanguageStandard>
+            <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+            <WholeProgramOptimization>false</WholeProgramOptimization>
+            <MultiProcessorCompilation>true</MultiProcessorCompilation>
+        </ClCompile>
+        <Link>
+            <SubSystem>Console</SubSystem>
+            <EnableCOMDATFolding>true</EnableCOMDATFolding>
+            <OptimizeReferences>true</OptimizeReferences>
+            <GenerateDebugInformation>true</GenerateDebugInformation>
+            <AdditionalLibraryDirectories>$(SolutionDir)lib\x64;$(SolutionDir)Includes\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+            <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;glew32s.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+            <IgnoreAllDefaultLibraries>
+            </IgnoreAllDefaultLibraries>
+        </Link>
+        <PostBuildEvent>
+            <Message>
+            </Message>
+            <Command>XCOPY "$(SolutionDir)$(ProjectName)\shaders" "$(TargetDir)shaders\" /S/E /Y
+                XCOPY "$(SolutionDir)$(ProjectName)\textures" "$(TargetDir)textures\" /S/E /Y
+            </Command>
+        </PostBuildEvent>
+    </ItemDefinitionGroup>
+    <ItemGroup>
+        <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD.cpp"/>
+        <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_avx2.cpp"/>
+        <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_avx512.cpp"/>
+        <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_internal.cpp"/>
+        <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_neon.cpp"/>
+        <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_sse2.cpp"/>
+        <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_sse41.cpp"/>
+        <ClCompile Include="..\Includes\imgui-master\backends\imgui_impl_opengl3.cpp"/>
+        <ClCompile Include="..\Includes\imgui-master\backends\imgui_impl_sdl.cpp"/>
+        <ClCompile Include="..\Includes\imgui-master\imgui.cpp"/>
+        <ClCompile Include="..\Includes\imgui-master\imgui_draw.cpp"/>
+        <ClCompile Include="..\Includes\imgui-master\imgui_tables.cpp"/>
+        <ClCompile Include="..\Includes\imgui-master\imgui_widgets.cpp"/>
+        <ClCompile Include="main.cpp"/>
+        <ClCompile Include="Scripts\Game.cpp"/>
+        <ClCompile Include="Scripts\Input\InputManager.cpp"/>
+        <ClCompile Include="Scripts\Interfaces\ISerialize.cpp"/>
+        <ClCompile Include="Scripts\Math\Vec2\IVec2.cpp"/>
+        <ClCompile Include="Scripts\Math\Vec2\SVec2.cpp"/>
+        <ClCompile Include="Scripts\Math\Vec2\Vec2.cpp"/>
+        <ClCompile Include="Scripts\UI\UIManager.cpp"/>
+        <ClCompile Include="Scripts\Utility\Console.cpp"/>
+        <ClCompile Include="SDL_FontCache\SDL_FontCache.c"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ClInclude Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD.h"/>
+        <ClInclude Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_internal.h"/>
+        <ClInclude Include="..\Includes\imgui-master\backends\imgui_impl_sdl.h"/>
+        <ClInclude Include="..\Includes\imgui-master\imconfig.h"/>
+        <ClInclude Include="..\Includes\imgui-master\imgui.h"/>
+        <ClInclude Include="..\Includes\imgui-master\imgui_internal.h"/>
+        <ClInclude Include="..\Includes\imgui-master\imstb_rectpack.h"/>
+        <ClInclude Include="..\Includes\imgui-master\imstb_textedit.h"/>
+        <ClInclude Include="..\Includes\imgui-master\imstb_truetype.h"/>
+        <ClInclude Include="Scripts\Config\ConfigFile.h"/>
+        <ClInclude Include="Scripts\Config\GameSettings.h"/>
+        <ClInclude Include="Scripts\Game.h"/>
+        <ClInclude Include="Scripts\Global\Constants.h"/>
+        <ClInclude Include="Scripts\Global\Defines.h"/>
+        <ClInclude Include="Scripts\Input\InputKeyCodes.h"/>
+        <ClInclude Include="Scripts\Input\InputManager.h"/>
+        <ClInclude Include="Scripts\Interfaces\ISerialize.h"/>
+        <ClInclude Include="Scripts\Macros\InlineReturn.h"/>
+        <ClInclude Include="Scripts\Math\Math.h"/>
+        <ClInclude Include="Scripts\Math\Vec2\IVec2.h"/>
+        <ClInclude Include="Scripts\Math\Vec2\SVec2.h"/>
+        <ClInclude Include="Scripts\Math\Vec2\Vec2.h"/>
+        <ClInclude Include="Scripts\UI\UIManager.h"/>
+        <ClInclude Include="Scripts\Utility\BitWise.h"/>
+        <ClInclude Include="Scripts\Utility\Console.h"/>
+        <ClInclude Include="Scripts\Utility\FileIO.h"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="packages.config"/>
+        <None Include="shaders\default.frag"/>
+        <None Include="shaders\default.vert"/>
+        <None Include="shaders\orthoUI.frag"/>
+        <None Include="shaders\orthoUI.vert"/>
+        <None Include="shaders\orthoWorld.frag"/>
+        <None Include="shaders\orthoWorld.vert"/>
+        <None Include="shaders\post\bloom.frag"/>
+        <None Include="shaders\post\bloom.vert"/>
+        <None Include="shaders\post\blur.frag"/>
+        <None Include="shaders\post\blur.vert"/>
+        <None Include="shaders\rendertarget\default.frag"/>
+        <None Include="shaders\rendertarget\default.vert"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Image Include="textures\brick.png"/>
+    </ItemGroup>
+    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
+    <ImportGroup Label="ExtensionTargets">
+        <Import Project="..\packages\sdl2_image.nuget.redist.2.0.5\build\native\sdl2_image.nuget.redist.targets" Condition="Exists('..\packages\sdl2_image.nuget.redist.2.0.5\build\native\sdl2_image.nuget.redist.targets')"/>
+        <Import Project="..\packages\sdl2_image.nuget.2.0.5\build\native\sdl2_image.nuget.targets" Condition="Exists('..\packages\sdl2_image.nuget.2.0.5\build\native\sdl2_image.nuget.targets')"/>
+        <Import Project="..\packages\sdl2_ttf.nuget.redist.2.0.15\build\native\sdl2_ttf.nuget.redist.targets" Condition="Exists('..\packages\sdl2_ttf.nuget.redist.2.0.15\build\native\sdl2_ttf.nuget.redist.targets')"/>
+        <Import Project="..\packages\sdl2_ttf.nuget.2.0.15\build\native\sdl2_ttf.nuget.targets" Condition="Exists('..\packages\sdl2_ttf.nuget.2.0.15\build\native\sdl2_ttf.nuget.targets')"/>
+        <Import Project="..\packages\cereal.1.0.0\build\native\cereal.targets" Condition="Exists('..\packages\cereal.1.0.0\build\native\cereal.targets')"/>
+        <Import Project="..\packages\sdl2.nuget.redist.2.0.14\build\native\sdl2.nuget.redist.targets" Condition="Exists('..\packages\sdl2.nuget.redist.2.0.14\build\native\sdl2.nuget.redist.targets')"/>
+        <Import Project="..\packages\sdl2.nuget.2.0.14\build\native\sdl2.nuget.targets" Condition="Exists('..\packages\sdl2.nuget.2.0.14\build\native\sdl2.nuget.targets')"/>
+        <Import Project="..\packages\boost.1.76.0.0\build\boost.targets" Condition="Exists('..\packages\boost.1.76.0.0\build\boost.targets')"/>
+        <Import Project="..\packages\boost_atomic-vc142.1.76.0.0\build\boost_atomic-vc142.targets" Condition="Exists('..\packages\boost_atomic-vc142.1.76.0.0\build\boost_atomic-vc142.targets')"/>
+        <Import Project="..\packages\boost_chrono-vc142.1.76.0.0\build\boost_chrono-vc142.targets" Condition="Exists('..\packages\boost_chrono-vc142.1.76.0.0\build\boost_chrono-vc142.targets')"/>
+        <Import Project="..\packages\boost_container-vc142.1.76.0.0\build\boost_container-vc142.targets" Condition="Exists('..\packages\boost_container-vc142.1.76.0.0\build\boost_container-vc142.targets')"/>
+        <Import Project="..\packages\boost_coroutine-vc142.1.76.0.0\build\boost_coroutine-vc142.targets" Condition="Exists('..\packages\boost_coroutine-vc142.1.76.0.0\build\boost_coroutine-vc142.targets')"/>
+        <Import Project="..\packages\boost_date_time-vc142.1.76.0.0\build\boost_date_time-vc142.targets" Condition="Exists('..\packages\boost_date_time-vc142.1.76.0.0\build\boost_date_time-vc142.targets')"/>
+        <Import Project="..\packages\boost_exception-vc142.1.76.0.0\build\boost_exception-vc142.targets" Condition="Exists('..\packages\boost_exception-vc142.1.76.0.0\build\boost_exception-vc142.targets')"/>
+        <Import Project="..\packages\boost_filesystem-vc142.1.76.0.0\build\boost_filesystem-vc142.targets" Condition="Exists('..\packages\boost_filesystem-vc142.1.76.0.0\build\boost_filesystem-vc142.targets')"/>
+        <Import Project="..\packages\boost_thread-vc142.1.76.0.0\build\boost_thread-vc142.targets" Condition="Exists('..\packages\boost_thread-vc142.1.76.0.0\build\boost_thread-vc142.targets')"/>
+    </ImportGroup>
+    <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+        <Error Condition="!Exists('..\packages\sdl2_image.nuget.redist.2.0.5\build\native\sdl2_image.nuget.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_image.nuget.redist.2.0.5\build\native\sdl2_image.nuget.redist.targets'))"/>
+        <Error Condition="!Exists('..\packages\sdl2_image.nuget.2.0.5\build\native\sdl2_image.nuget.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_image.nuget.2.0.5\build\native\sdl2_image.nuget.targets'))"/>
+        <Error Condition="!Exists('..\packages\sdl2_ttf.nuget.redist.2.0.15\build\native\sdl2_ttf.nuget.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_ttf.nuget.redist.2.0.15\build\native\sdl2_ttf.nuget.redist.targets'))"/>
+        <Error Condition="!Exists('..\packages\sdl2_ttf.nuget.2.0.15\build\native\sdl2_ttf.nuget.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_ttf.nuget.2.0.15\build\native\sdl2_ttf.nuget.targets'))"/>
+        <Error Condition="!Exists('..\packages\cereal.1.0.0\build\native\cereal.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cereal.1.0.0\build\native\cereal.targets'))"/>
+        <Error Condition="!Exists('..\packages\sdl2.nuget.redist.2.0.14\build\native\sdl2.nuget.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2.nuget.redist.2.0.14\build\native\sdl2.nuget.redist.targets'))"/>
+        <Error Condition="!Exists('..\packages\sdl2.nuget.2.0.14\build\native\sdl2.nuget.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2.nuget.2.0.14\build\native\sdl2.nuget.targets'))"/>
+        <Error Condition="!Exists('..\packages\boost.1.76.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.76.0.0\build\boost.targets'))"/>
+        <Error Condition="!Exists('..\packages\boost_atomic-vc142.1.76.0.0\build\boost_atomic-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_atomic-vc142.1.76.0.0\build\boost_atomic-vc142.targets'))"/>
+        <Error Condition="!Exists('..\packages\boost_chrono-vc142.1.76.0.0\build\boost_chrono-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_chrono-vc142.1.76.0.0\build\boost_chrono-vc142.targets'))"/>
+        <Error Condition="!Exists('..\packages\boost_container-vc142.1.76.0.0\build\boost_container-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_container-vc142.1.76.0.0\build\boost_container-vc142.targets'))"/>
+        <Error Condition="!Exists('..\packages\boost_coroutine-vc142.1.76.0.0\build\boost_coroutine-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_coroutine-vc142.1.76.0.0\build\boost_coroutine-vc142.targets'))"/>
+        <Error Condition="!Exists('..\packages\boost_date_time-vc142.1.76.0.0\build\boost_date_time-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_date_time-vc142.1.76.0.0\build\boost_date_time-vc142.targets'))"/>
+        <Error Condition="!Exists('..\packages\boost_exception-vc142.1.76.0.0\build\boost_exception-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_exception-vc142.1.76.0.0\build\boost_exception-vc142.targets'))"/>
+        <Error Condition="!Exists('..\packages\boost_filesystem-vc142.1.76.0.0\build\boost_filesystem-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_filesystem-vc142.1.76.0.0\build\boost_filesystem-vc142.targets'))"/>
+        <Error Condition="!Exists('..\packages\boost_thread-vc142.1.76.0.0\build\boost_thread-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_thread-vc142.1.76.0.0\build\boost_thread-vc142.targets'))"/>
+    </Target>
 </Project>

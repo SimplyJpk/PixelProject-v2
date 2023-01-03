@@ -5,23 +5,23 @@
 class UIManager
 {
 public:
-    static UIManager* GetInstance()
-    {
-        static UIManager instance;
-        return &instance;
-    }
-    
-    void Init(SDL_Window* window, SDL_GLContext glContext);
-    
-    void DrawGUI();
+   static UIManager* GetInstance()
+   {
+      static UIManager instance;
+      return &instance;
+   }
 
-    void BeginFrame() const;
-    void EndFrame();
+   void Init(SDL_Window* window, SDL_GLContext glContext);
+
+   void DrawGUI();
+
+   void BeginFrame() const;
+   void EndFrame();
 
 protected:
-    SDL_Window* _window;
-    
+   SDL_Window* _window;
+
 private:
-    UIManager() = default;
-    ~UIManager();
+   UIManager() = default;
+   ~UIManager();
 };

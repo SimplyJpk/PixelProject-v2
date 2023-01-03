@@ -1,6 +1,4 @@
 ﻿#pragma once
 
-namespace PixelProject
-{
-    
+namespace PixelProject {
 }

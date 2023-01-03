@@ -2,8 +2,8 @@
 
 SVec2::SVec2()
 {
-    x = 0;
-    y = 0;
+   x = 0;
+   y = 0;
 }
 
 SVec2::SVec2(const short x, const short y): x(x), y(y)
@@ -12,12 +12,12 @@ SVec2::SVec2(const short x, const short y): x(x), y(y)
 
 SVec2 SVec2::operator+(const SVec2& rhs) const
 {
-    return {x + rhs.x, y + rhs.y};
+   return {x + rhs.x, y + rhs.y};
 }
 
 SVec2& SVec2::operator=(const SVec2 other)
 {
-    x = other.x;
-    y = other.y;
-    return *this;
+   x = other.x;
+   y = other.y;
+   return *this;
 }
