@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\shaders">
+      <UniqueIdentifier>{4c77121f-5a63-41d1-b450-7f24cd22f6e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Lib">
+      <UniqueIdentifier>{2c90945c-c6b8-45af-a623-a08fe5566903}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Lib\ImGUI">
+      <UniqueIdentifier>{9307618b-0ee3-4dfc-bf05-93f049cf2724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lib">
+      <UniqueIdentifier>{2f5b34eb-c78d-4073-82af-647a4d316d33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lib\ImGUI">
+      <UniqueIdentifier>{51cfb093-430e-4529-8fbf-a8a6f9ba4b7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Lib\FastNoise">
+      <UniqueIdentifier>{4bef726d-34e1-4324-aea6-1607b754ffa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lib\FastNoise">
+      <UniqueIdentifier>{a8e4a9bd-82a0-4a30-a96d-0ffc3ec6e22a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\shaders\rendertarget">
+      <UniqueIdentifier>{19982399-f592-44bf-a0e2-d43140076bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\shaders\post">
+      <UniqueIdentifier>{979328da-75d2-4d36-8192-aebe2b445950}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\textures">
+      <UniqueIdentifier>{9ae9cd85-b312-4b2c-b5ba-331d28309b1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Lib\boost">
+      <UniqueIdentifier>{b6c34a87-5e11-498e-a0d1-7a2dd5c7652d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SDL_FontCache\SDL_FontCache.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\imgui-master\imgui.cpp">
+      <Filter>Source Files\Lib\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\imgui-master\backends\imgui_impl_sdl.cpp">
+      <Filter>Source Files\Lib\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\imgui-master\imgui_draw.cpp">
+      <Filter>Source Files\Lib\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\imgui-master\imgui_tables.cpp">
+      <Filter>Source Files\Lib\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\imgui-master\imgui_widgets.cpp">
+      <Filter>Source Files\Lib\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\imgui-master\backends\imgui_impl_opengl3.cpp">
+      <Filter>Source Files\Lib\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD.cpp">
+      <Filter>Source Files\Lib\FastNoise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_avx2.cpp">
+      <Filter>Source Files\Lib\FastNoise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_avx512.cpp">
+      <Filter>Source Files\Lib\FastNoise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_internal.cpp">
+      <Filter>Source Files\Lib\FastNoise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_neon.cpp">
+      <Filter>Source Files\Lib\FastNoise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_sse2.cpp">
+      <Filter>Source Files\Lib\FastNoise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_sse41.cpp">
+      <Filter>Source Files\Lib\FastNoise</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Utility\Console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Interfaces\ISerialize.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Math\Vec2\IVec2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Math\Vec2\SVec2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Math\Vec2\Vec2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\UI\UIManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="boost\threadpool.hpp">
+      <Filter>Header Files\Lib\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Includes\imgui-master\backends\imgui_impl_sdl.h">
+      <Filter>Header Files\Lib\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Includes\imgui-master\imgui.h">
+      <Filter>Header Files\Lib\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Includes\imgui-master\imconfig.h">
+      <Filter>Header Files\Lib\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Includes\imgui-master\imgui_internal.h">
+      <Filter>Header Files\Lib\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Includes\imgui-master\imstb_rectpack.h">
+      <Filter>Header Files\Lib\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Includes\imgui-master\imstb_textedit.h">
+      <Filter>Header Files\Lib\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Includes\imgui-master\imstb_truetype.h">
+      <Filter>Header Files\Lib\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD_internal.h">
+      <Filter>Header Files\Lib\FastNoise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Includes\FastNoiseSIMD\FastNoiseSIMD.h">
+      <Filter>Header Files\Lib\FastNoise</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Utility\FileIO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Utility\BitWise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Utility\Console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Config\ConfigFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Config\GameSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Global\Constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Global\Defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Interfaces\ISerialize.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Macros\InlineReturn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Math\Vec2\IVec2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Math\Vec2\SVec2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Math\Vec2\Vec2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Math\Math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\UI\UIManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="shaders\default.frag">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="shaders\default.vert">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="shaders\orthoUI.frag">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="shaders\orthoUI.vert">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="shaders\orthoWorld.frag">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="shaders\orthoWorld.vert">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="shaders\rendertarget\default.frag">
+      <Filter>Resource Files\shaders\rendertarget</Filter>
+    </None>
+    <None Include="shaders\rendertarget\default.vert">
+      <Filter>Resource Files\shaders\rendertarget</Filter>
+    </None>
+    <None Include="shaders\post\bloom.vert">
+      <Filter>Resource Files\shaders\post</Filter>
+    </None>
+    <None Include="shaders\post\blur.frag">
+      <Filter>Resource Files\shaders\post</Filter>
+    </None>
+    <None Include="shaders\post\blur.vert">
+      <Filter>Resource Files\shaders\post</Filter>
+    </None>
+    <None Include="shaders\post\bloom.frag">
+      <Filter>Resource Files\shaders\post</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\brick.png">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
