@@ -31,25 +31,30 @@ void InputManager::Update()
    while (SDL_PollEvent(&event))
    {
       ImGui_ImplSDL2_ProcessEvent(&event);
+      
+      _keyboard = SDL_GetKeyboardState(nullptr);
+      _mouse = SDL_GetMouseState(&(_mouse_x_pos), &(this->_mouse_y_pos));
+
+      auto keyCode = static_cast<KeyCode>(event.key.keysym.sym);
+      auto mouseCode = static_cast<MouseCode>(event.button.button);
+      
       switch (event.type)
       {
       case SDL_KEYDOWN:
-         _keyboard = SDL_GetKeyboardState(nullptr);
-         _is_key_down[event.key.keysym.scancode] = true;
+         _is_key_down[static_cast<int>(keyCode)] = true;
          _is_key_down_dirty = true;
-         _is_key_held[event.key.keysym.scancode] = true;
+         _is_key_held[static_cast<int>(keyCode)] = true;
          
-         if (_key_change_map.contains(static_cast<KeyCode>(event.key.keysym.scancode)))
-            _key_change_map[static_cast<KeyCode>(event.key.keysym.scancode)]->Invoke(event, true);
+         if (_key_change_map.contains(keyCode))
+            _key_change_map[keyCode]->Invoke(event, true);
          break;
       case SDL_KEYUP:
-         _keyboard = SDL_GetKeyboardState(nullptr);
-         _is_key_up[event.key.keysym.scancode] = true;
+         _is_key_up[static_cast<int>(keyCode)] = true;
          _is_key_up_dirty = true;
-         _is_key_held[event.key.keysym.scancode] = false;
+         _is_key_held[static_cast<int>(keyCode)] = false;
          
-         if (_key_change_map.contains(static_cast<KeyCode>(event.key.keysym.scancode)))
-            _key_change_map[static_cast<KeyCode>(event.key.keysym.scancode)]->Invoke(event, false);
+         if (_key_change_map.contains(keyCode))
+            _key_change_map[keyCode]->Invoke(event, false);
          break;
       case SDL_MOUSEMOTION:
          _mouse_x_pos = event.motion.x;
@@ -58,31 +63,21 @@ void InputManager::Update()
          _current_mouse_pos = IVec2(_mouse_x_pos, _mouse_y_pos);
          break;
       case SDL_MOUSEBUTTONDOWN:
-         _mouse = SDL_GetMouseState(&(_mouse_x_pos), &(this->_mouse_y_pos));
-         if (event.button.button == SDL_BUTTON_LEFT)
-            _is_mouse_down[MouseLeft] = true;
-         else if (event.button.button == SDL_BUTTON_RIGHT)
-            _is_mouse_down[MouseRight] = true;
-         else if (event.button.button == SDL_BUTTON_MIDDLE)
-            _is_mouse_down[MouseMiddle] = true;
+         _is_mouse_down[mouseCode] = true;
+         _is_mouse_held[mouseCode] = true;
          _is_mouse_down_dirty = true;
 
-         if (_mouse_change_map.contains(static_cast<MouseCode>(event.button.button)))
-            _mouse_change_map[static_cast<MouseCode>(event.button.button)]->Invoke(event, true);
+         if (_mouse_change_map.contains(mouseCode))
+            _mouse_change_map[mouseCode]->Invoke(event, true);
          break;
 
       case SDL_MOUSEBUTTONUP:
-         _mouse = SDL_GetMouseState(&(_mouse_x_pos), &(this->_mouse_y_pos));
-         if (event.button.button == SDL_BUTTON_LEFT)
-            _is_mouse_up[MouseLeft] = true;
-         else if (event.button.button == SDL_BUTTON_RIGHT)
-            _is_mouse_up[MouseRight] = true;
-         else if (event.button.button == SDL_BUTTON_MIDDLE)
-            _is_mouse_up[MouseMiddle] = true;
+         _is_mouse_up[event.button.button] = true;
+         _is_mouse_held[event.button.button] = false;
          _is_mouse_up_dirty = true;
 
-         if (_mouse_change_map.contains(static_cast<MouseCode>(event.button.button)))
-            _mouse_change_map[static_cast<MouseCode>(event.button.button)]->Invoke(event, false);
+         if (_mouse_change_map.contains(mouseCode))
+            _mouse_change_map[mouseCode]->Invoke(event, false);
          break;
 
       case SDL_MOUSEWHEEL:

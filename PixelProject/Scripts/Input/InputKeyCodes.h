@@ -5,7 +5,9 @@
 // Keys https://wiki.libsdl.org/SDLScancodeLookup
 // Max value from https://wiki.libsdl.org/SDLScancodeLookup
 constexpr short KEYCODE_MAX_VALUE = 284;
-constexpr short MOUSECODE_MAX_VALUE = 3;
+constexpr short MOUSECODE_MAX_VALUE = 6;
+
+namespace PixelProject::Input {
 
 // TODO : (James) Should this cover absolutely everything? 
 enum class KeyCode
@@ -90,7 +92,11 @@ enum class KeyCode
 
 enum MouseCode
 {
-   MouseLeft,
-   MouseRight,
-   MouseMiddle
+   Undefined = 0,
+   MouseLeft = SDL_BUTTON_LEFT,
+   MouseMiddle = SDL_BUTTON_MIDDLE,
+   MouseRight = SDL_BUTTON_RIGHT,
+   MouseX1 = SDL_BUTTON_X1,
+   MouseX2 = SDL_BUTTON_X2,   
 };
+}
