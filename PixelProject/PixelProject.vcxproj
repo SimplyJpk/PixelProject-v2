@@ -201,6 +201,7 @@
         <ClInclude Include="Scripts\Utility\BitWise.h"/>
         <ClInclude Include="Scripts\Utility\Console.h"/>
         <ClInclude Include="Scripts\Utility\FileIO.h"/>
+        <ClInclude Include="Scripts\Input\InputEventContainer.h" />
     </ItemGroup>
     <ItemGroup>
         <None Include="packages.config"/>

@@ -5,6 +5,7 @@
 // Keys https://wiki.libsdl.org/SDLScancodeLookup
 // Max value from https://wiki.libsdl.org/SDLScancodeLookup
 constexpr short KEYCODE_MAX_VALUE = 284;
+constexpr short MOUSECODE_MAX_VALUE = 3;
 
 // TODO : (James) Should this cover absolutely everything? 
 enum class KeyCode
@@ -91,6 +92,5 @@ enum MouseCode
 {
    MouseLeft,
    MouseRight,
-   MouseMiddle,
-   MouseClickTypeCount
+   MouseMiddle
 };
