@@ -38,12 +38,18 @@ void InputManager::Update()
          _is_key_down[event.key.keysym.scancode] = true;
          _is_key_down_dirty = true;
          _is_key_held[event.key.keysym.scancode] = true;
+         
+         if (_key_change_map.contains(static_cast<KeyCode>(event.key.keysym.scancode)))
+            _key_change_map[static_cast<KeyCode>(event.key.keysym.scancode)]->Invoke(event, true);
          break;
       case SDL_KEYUP:
          _keyboard = SDL_GetKeyboardState(nullptr);
          _is_key_up[event.key.keysym.scancode] = true;
          _is_key_up_dirty = true;
          _is_key_held[event.key.keysym.scancode] = false;
+         
+         if (_key_change_map.contains(static_cast<KeyCode>(event.key.keysym.scancode)))
+            _key_change_map[static_cast<KeyCode>(event.key.keysym.scancode)]->Invoke(event, false);
          break;
       case SDL_MOUSEMOTION:
          _mouse_x_pos = event.motion.x;
@@ -59,8 +65,10 @@ void InputManager::Update()
             _is_mouse_down[MouseRight] = true;
          else if (event.button.button == SDL_BUTTON_MIDDLE)
             _is_mouse_down[MouseMiddle] = true;
-
          _is_mouse_down_dirty = true;
+
+         if (_mouse_change_map.contains(static_cast<MouseCode>(event.button.button)))
+            _mouse_change_map[static_cast<MouseCode>(event.button.button)]->Invoke(event, true);
          break;
 
       case SDL_MOUSEBUTTONUP:
@@ -71,8 +79,10 @@ void InputManager::Update()
             _is_mouse_up[MouseRight] = true;
          else if (event.button.button == SDL_BUTTON_MIDDLE)
             _is_mouse_up[MouseMiddle] = true;
-
          _is_mouse_up_dirty = true;
+
+         if (_mouse_change_map.contains(static_cast<MouseCode>(event.button.button)))
+            _mouse_change_map[static_cast<MouseCode>(event.button.button)]->Invoke(event, false);
          break;
 
       case SDL_MOUSEWHEEL:
