@@ -3,6 +3,9 @@
 #include <SDL.h>
 
 #include "UI/UIManager.h"
+#include "Input/InputManager.h"
+
+using namespace PixelProject::Input;
 
 class Game
 {
@@ -29,10 +32,12 @@ protected:
    SDL_Window* _window;
 
    UIManager* _ui_manager;
+   InputManager* _input_manager;
 
    double deltaTime = 0.0;
    double fixedTime = 0.0;
 
 private:
    Game() = default;
+   bool _is_running = true;
 };

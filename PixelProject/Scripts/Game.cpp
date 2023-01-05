@@ -20,6 +20,7 @@ bool Game::Initialize()
 
    glViewport(0, 0, 1280, 720);
 
+   _input_manager = InputManager::GetInstance();
    _ui_manager->Init(_window, _context);
 
    return true;
@@ -31,9 +32,10 @@ void Game::Run()
    typedef std::chrono::duration<float, std::milli> duration;
 
    auto deltaClock = clock::now();
-
+   _is_running = true;
+   
    // TODO : (James) While GameStateManager != IsShuttingDown??
-   while (true)
+   while (_is_running)
    {
       deltaTime = duration(clock::now() - deltaClock).count();
       deltaClock = clock::now();
@@ -68,15 +70,9 @@ void Game::Update()
 
 void Game::InputUpdate()
 {
-   // TODO : (James) Input Manager
-   SDL_Event event;
-   while (SDL_PollEvent(&event))
-   {
-      if (event.type == SDL_QUIT)
-      {
-         return;
-      }
-   }
+   _input_manager->Update();
+   if (_input_manager->GetKeyState(KeyCode::Escape))
+      _is_running = false;
 }
 
 void Game::Render()
