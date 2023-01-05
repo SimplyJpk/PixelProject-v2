@@ -101,6 +101,13 @@ void InputManager::Update()
 
 #pragma region Mouse
 
+bool InputManager::IsMouseHeld(const MouseCode mouse_code) const
+{
+   if (!IsValidMouse(mouse_code))
+      return false;
+   return _is_mouse_held[mouse_code];
+}
+
 bool InputManager::IsMouseDown(const MouseCode mouse_code) const
 {
    if (!IsValidMouse(mouse_code))

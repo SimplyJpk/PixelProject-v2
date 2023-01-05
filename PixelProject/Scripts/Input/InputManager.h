@@ -36,6 +36,7 @@ public:
 #pragma endregion Listeners
 
    // Mouse
+   bool IsMouseHeld(MouseCode mouse_button) const;
    bool IsMouseDown(MouseCode mouse_code) const;
    bool IsMouseUp(MouseCode mouse_code) const;
    bool GetMouseState(MouseCode mouse_code) const;
@@ -74,6 +75,7 @@ private:
    IVec2 _mouse_scroll = IVec2::Zero();
    
    bool _is_key_held[KEYCODE_MAX_VALUE]{ false };
+   bool _is_mouse_held[MOUSECODE_MAX_VALUE]{ false };
 
    bool _is_key_down[KEYCODE_MAX_VALUE]{ false };
    bool _is_key_down_dirty = false;
