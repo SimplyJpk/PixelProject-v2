@@ -119,22 +119,9 @@ bool InputManager::IsMouseUp(const MouseCode mouse_code) const
 
 bool InputManager::GetMouseState(const MouseCode mouse_code) const
 {
-   switch (mouse_code)
-   {
-   case MouseLeft:
-      if (_mouse & SDL_BUTTON(1))
-         return true;
-      break;
-   case MouseMiddle:
-      if (_mouse & SDL_BUTTON(2))
-         return true;
-      break;
-   case MouseRight:
-      if (_mouse & SDL_BUTTON(3))
-         return true;
-      break;
-   }
-   return false;
+   if (!IsValidMouse(mouse_code))
+      return false;
+   return _mouse & SDL_BUTTON(mouse_code);
 }
 
 #pragma endregion Mouse
