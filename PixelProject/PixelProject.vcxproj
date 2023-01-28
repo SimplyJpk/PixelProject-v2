@@ -165,6 +165,7 @@
         <ClCompile Include="..\Includes\imgui-master\imgui_widgets.cpp" />
         <ClCompile Include="main.cpp" />
         <ClCompile Include="Scripts\Game.cpp" />
+        <ClCompile Include="Scripts\Input\InputContainer.cpp" />
         <ClCompile Include="Scripts\Input\InputManager.cpp" />
         <ClCompile Include="Scripts\Interfaces\ISerialize.cpp" />
         <ClCompile Include="Scripts\Math\Vec2\IVec2.cpp" />
@@ -189,6 +190,7 @@
         <ClInclude Include="Scripts\Game.h" />
         <ClInclude Include="Scripts\Global\Constants.h" />
         <ClInclude Include="Scripts\Global\Defines.h" />
+        <ClInclude Include="Scripts\Input\InputContainer.h" />
         <ClInclude Include="Scripts\Input\InputEventContainer.h" />
         <ClInclude Include="Scripts\Input\InputKeyCodes.h" />
         <ClInclude Include="Scripts\Input\InputManager.h" />
