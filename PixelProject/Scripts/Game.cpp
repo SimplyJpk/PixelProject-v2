@@ -23,6 +23,8 @@ bool Game::Initialize()
    _input_manager = InputManager::GetInstance();
    _ui_manager->Init(_window, _context);
 
+   _camera = new FlyCamera();
+
    return true;
 }
 
@@ -48,6 +50,7 @@ void Game::Run()
 
       // Runs once a frame
       Update();
+      _camera->Update(deltaTime);
 
       // Draw
       Render();

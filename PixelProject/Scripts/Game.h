@@ -4,6 +4,7 @@
 
 #include "UI/UIManager.h"
 #include "Input/InputManager.h"
+#include "Camera/FlyCamera.h"
 
 using namespace PixelProject::Input;
 
@@ -33,6 +34,8 @@ protected:
 
    UIManager* _ui_manager;
    InputManager* _input_manager;
+
+   FlyCamera* _camera;
 
    double deltaTime = 0.0;
    double fixedTime = 0.0;
