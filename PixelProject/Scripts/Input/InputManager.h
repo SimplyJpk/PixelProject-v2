@@ -27,8 +27,12 @@ public:
 
 #pragma region Listeners
    
-   void AddKeyListener(KeyCode key_code, const std::string& name, const InputCallback& callback);
+   void AddKeyListener(KeyCode key_code, const std::string& name, InputCallback callback);
+   void AddKeyListeners(const std::vector<KeyCode>& key_codes, const std::string& name, InputCallback callback);
+   
    void RemoveKeyListener(KeyCode key_code, const std::string& name);
+   void RemoveKeyListeners(const std::vector<KeyCode>& key_codes, const std::string& name);
+   
 
    void AddMouseListener(MouseCode mouse_button, const std::string& name, const InputCallback& callback);
    void RemoveMouseListener(MouseCode mouse_button, const std::string& name);

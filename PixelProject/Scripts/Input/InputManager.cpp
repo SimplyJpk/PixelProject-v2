@@ -35,7 +35,7 @@ void InputManager::Update()
       _keyboard = SDL_GetKeyboardState(nullptr);
       _mouse = SDL_GetMouseState(&(_mouse_x_pos), &(this->_mouse_y_pos));
 
-      auto keyCode = static_cast<KeyCode>(event.key.keysym.sym);
+      auto keyCode = static_cast<KeyCode>(event.key.keysym.scancode);
       auto mouseCode = static_cast<MouseCode>(event.button.button);
       
       switch (event.type)
@@ -162,17 +162,30 @@ bool InputManager::GetKeyState(KeyCode key_code) const
 
 #pragma region Listeners
 
-void InputManager::AddKeyListener(const KeyCode key_code, const std::string& name, const InputCallback& callback)
+void InputManager::AddKeyListener(const KeyCode key_code, const std::string& name, InputCallback callback)
 {
    if (!_key_change_map.contains(key_code))
       _key_change_map[key_code] = new InputEventContainer();
    _key_change_map[key_code]->AddListener(name, callback);
 }
 
+void InputManager::AddKeyListeners(const std::vector<KeyCode>& key_codes, const std::string& name,
+   InputCallback callback)
+{
+   for (auto& keyCode : key_codes)
+      AddKeyListener(keyCode, name, callback);
+}
+
 void InputManager::RemoveKeyListener(const KeyCode key_code, const std::string& name)
 {
    if (_key_change_map.contains(key_code))
       _key_change_map[key_code]->RemoveListener(name);
+}
+
+void InputManager::RemoveKeyListeners(const std::vector<KeyCode>& key_codes, const std::string& name)
+{
+   for (auto& keyCode : key_codes)
+      RemoveKeyListener(keyCode, name);
 }
 
 void InputManager::AddMouseListener(const MouseCode mouse_button, const std::string& name, const InputCallback& callback)
