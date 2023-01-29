@@ -57,18 +57,18 @@ void FlyCamera::Update(float deltaTime)
 
       SetPosition(_position);
    }
-
-   Console::PrintInfo("Camera position: " + std::to_string(_position.x) + ", " + std::to_string(_position.y) + ", " + std::to_string(_position.z));
+   
+   DEBUG_FULL_LOG("Camera position: " + std::to_string(_position.x) + ", " + std::to_string(_position.y) + ", " + std::to_string(_position.z));
 }
 
 void FlyCamera::HandleKeyMovement(SDL_Event& event, const bool is_pressed)
 {
    _key_pressed[static_cast<KeyCode>(event.key.keysym.scancode)] = is_pressed;
-   Console::PrintInfo("Key pressed: " + std::to_string(event.key.keysym.sym) + " Pressed:" + std::to_string(is_pressed));
+   DEBUG_FULL_LOG("Key pressed: " + std::to_string(event.key.keysym.sym) + " Pressed:" + std::to_string(is_pressed));
 }
 
 void FlyCamera::HandleKeyShift(SDL_Event& event, const bool is_pressed)
 {
    _shift_held = is_pressed;
-   Console::PrintInfo("Shift pressed: " + std::to_string(is_pressed) + " Pressed: " + std::to_string(is_pressed));
+   DEBUG_FULL_LOG("Shift pressed: " + std::to_string(is_pressed) + " Pressed: " + std::to_string(is_pressed));
 }
