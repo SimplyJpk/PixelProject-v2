@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "Input/InputContainer.h"
 #include "Macros/InlineReturn.h"
 
 struct IVec2
@@ -26,6 +27,17 @@ struct IVec2
    IVec2 operator+(const IVec2& rhs) const;
 
    IVec2& operator =(const IVec2 other);
+   IVec2& operator+=(const IVec2& vec2);
+   bool operator==(const IVec2& vec2) const;
 
 #pragma endregion OPPERATOR_OVERLOADS
+
+#pragma region FUNCTIONS
+   
+   IVec2 GetNormalized() const;
+   void Normalize();
+   
+   float GetMagnitude() const;
+
+#pragma endregion FUNCTIONS
 };
