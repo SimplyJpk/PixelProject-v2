@@ -164,6 +164,8 @@
         <ClCompile Include="..\Includes\imgui-master\imgui_tables.cpp" />
         <ClCompile Include="..\Includes\imgui-master\imgui_widgets.cpp" />
         <ClCompile Include="main.cpp" />
+        <ClCompile Include="Scripts\Camera\Camera.cpp" />
+        <ClCompile Include="Scripts\Camera\FlyCamera.cpp" />
         <ClCompile Include="Scripts\Game.cpp" />
         <ClCompile Include="Scripts\Input\InputContainer.cpp" />
         <ClCompile Include="Scripts\Input\InputManager.cpp" />
@@ -185,6 +187,8 @@
         <ClInclude Include="..\Includes\imgui-master\imstb_rectpack.h" />
         <ClInclude Include="..\Includes\imgui-master\imstb_textedit.h" />
         <ClInclude Include="..\Includes\imgui-master\imstb_truetype.h" />
+        <ClInclude Include="Scripts\Camera\Camera.h" />
+        <ClInclude Include="Scripts\Camera\FlyCamera.h" />
         <ClInclude Include="Scripts\Config\ConfigFile.h" />
         <ClInclude Include="Scripts\Config\GameSettings.h" />
         <ClInclude Include="Scripts\Game.h" />
