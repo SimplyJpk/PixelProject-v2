@@ -12,6 +12,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+#include "Debug/GLErrorCallback.h"
+
 void PrintInGameCommands();
 bool CreateWindowAndContext();
 
@@ -41,7 +43,7 @@ int main(int argc, char* argv[])
       success = false;
    }
 
-   // GLErrorCallback::LinkCallback(true);
+   GLErrorCallback::LinkCallback(true);
    game.Run();
 
    SDL_DestroyWindow(g_window);
@@ -64,7 +66,7 @@ bool CreateWindowAndContext()
    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
-   const SDL_WindowFlags windowFlags = (SDL_WindowFlags)(SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE |
+   constexpr auto windowFlags = static_cast<SDL_WindowFlags>(SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE |
       SDL_WINDOW_ALLOW_HIGHDPI);
    g_window = SDL_CreateWindow("Pixel Project v2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                g_config->window_size_x, g_config->window_size_y, windowFlags);
@@ -82,11 +84,11 @@ bool CreateWindowAndContext()
    }
    else
    {
-      GLenum err = glewInit();
+      const GLenum err = glewInit();
       if (GLEW_OK != err)
       {
          // Convert GLubyte * to char *
-         auto errStr = reinterpret_cast<const char*>(glewGetErrorString(err));
+         const auto errStr = reinterpret_cast<const char*>(glewGetErrorString(err));
          Console::PrintError(std::string("GLEW failed to initialize! GLEW Err: %s\n", errStr));
          success = false;
       }

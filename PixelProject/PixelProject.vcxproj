@@ -166,6 +166,7 @@
         <ClCompile Include="main.cpp" />
         <ClCompile Include="Scripts\Camera\Camera.cpp" />
         <ClCompile Include="Scripts\Camera\FlyCamera.cpp" />
+        <ClCompile Include="Scripts\Debug\GLErrorCallback.cpp" />
         <ClCompile Include="Scripts\Game.cpp" />
         <ClCompile Include="Scripts\Input\InputContainer.cpp" />
         <ClCompile Include="Scripts\Input\InputManager.cpp" />
@@ -191,6 +192,7 @@
         <ClInclude Include="Scripts\Camera\FlyCamera.h" />
         <ClInclude Include="Scripts\Config\ConfigFile.h" />
         <ClInclude Include="Scripts\Config\GameSettings.h" />
+        <ClInclude Include="Scripts\Debug\GLErrorCallback.h" />
         <ClInclude Include="Scripts\Game.h" />
         <ClInclude Include="Scripts\Global\Constants.h" />
         <ClInclude Include="Scripts\Global\Defines.h" />
