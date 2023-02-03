@@ -30,6 +30,9 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# Include Debug if it is in Scripts folder
+!*/[Ss]cripts/[Dd]ebug/
+
 # Idea
 .idea
 # Visual Studio 2015/2017 cache/options directory
