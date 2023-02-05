@@ -174,6 +174,8 @@
         <ClCompile Include="Scripts\Math\Vec2\IVec2.cpp" />
         <ClCompile Include="Scripts\Math\Vec2\SVec2.cpp" />
         <ClCompile Include="Scripts\Math\Vec2\Vec2.cpp" />
+        <ClCompile Include="Scripts\Shaders\Shader.cpp" />
+        <ClCompile Include="Scripts\Shaders\ShaderManager.cpp" />
         <ClCompile Include="Scripts\UI\UIManager.cpp" />
         <ClCompile Include="Scripts\Utility\Console.cpp" />
         <ClCompile Include="SDL_FontCache\SDL_FontCache.c" />
@@ -206,6 +208,8 @@
         <ClInclude Include="Scripts\Math\Vec2\IVec2.h" />
         <ClInclude Include="Scripts\Math\Vec2\SVec2.h" />
         <ClInclude Include="Scripts\Math\Vec2\Vec2.h" />
+        <ClInclude Include="Scripts\Shaders\Shader.h" />
+        <ClInclude Include="Scripts\Shaders\ShaderManager.h" />
         <ClInclude Include="Scripts\UI\UIManager.h" />
         <ClInclude Include="Scripts\Utility\BitWise.h" />
         <ClInclude Include="Scripts\Utility\Console.h" />
