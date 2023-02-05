@@ -159,7 +159,7 @@ bool ShaderManager::ShaderFromFiles(const uint8_t shader_mask, const std::string
    return false;
 }
 
-Shader& ShaderManager::GetShader(const GLint program_id)
+Shader* ShaderManager::GetShader(const GLint program_id)
 {
    std::unordered_map<int, std::string>::iterator i;
    if ((i = _program_name.find(program_id)) != _program_name.end())
@@ -169,11 +169,29 @@ Shader& ShaderManager::GetShader(const GLint program_id)
    throw std::runtime_error("ShaderManager::GetShader() : Shader '" + std::to_string(program_id) + "' not found");
 }
 
-Shader& ShaderManager::GetShader(const std::string& program_name) const
+Shader* ShaderManager::GetShader(const std::string& program_name) const
 {
    if (const auto value = _shaders.find(program_name); value != _shaders.end())
-      return *value->second;
+      return value->second;
    throw std::runtime_error("ShaderManager::GetShader() : Shader '" + program_name +"' not found");
+}
+
+bool ShaderManager::SetDefaultShader(const std::string& shader_name)
+{
+   _default_shader_name = shader_name;
+   if (_shaders.contains(shader_name))
+      return true;
+   return false;
+}
+
+void ShaderManager::SetDefaultShader(const Shader* shader)
+{
+   SetDefaultShader(shader->GetName());
+}
+
+Shader* ShaderManager::GetDefaultShader() const
+{
+   return GetShader(_default_shader_name);
 }
 
 constexpr int ShaderManager::GetShaderIndex(const ShaderTypes gl_shader_type)

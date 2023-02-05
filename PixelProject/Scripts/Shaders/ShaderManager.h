@@ -41,8 +41,12 @@ public:
 
    bool ShaderFromFiles(uint8_t shader_mask, const std::string& name, const std::string& file_name);
 
-   Shader& GetShader(GLint program_id);
-   Shader& GetShader(const std::string& program_name) const;
+   Shader* GetShader(GLint program_id);
+   Shader* GetShader(const std::string& program_name) const;
+
+   bool SetDefaultShader(const std::string& shader_name);
+   void SetDefaultShader(const Shader* shader);
+   Shader* GetDefaultShader() const;
 
    GLint GetProgramID(const char* program_name);
    std::string GetProgramName(const GLint program_id);
@@ -60,6 +64,7 @@ public:
    
 protected:
    static constexpr short SHADER_TYPES_COUNT = 6;
+   std::string _default_shader_name;
    
 private:
    ShaderManager() = default;

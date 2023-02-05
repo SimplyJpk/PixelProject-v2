@@ -48,3 +48,8 @@ GLuint Shader::GetUniformLocation(const std::string& uniform_name)
    // Complain that it doesn't exist
    throw std::runtime_error("Program [" + std::to_string(_program) + " '" + _name + "']: '" + uniform_name + "' does not exist.");
 }
+
+std::string Shader::GetName() const
+{
+   return _name;
+}

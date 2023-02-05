@@ -15,6 +15,7 @@ public:
 
    GLuint GetProgramID() const;
    GLuint GetUniformLocation(const std::string& uniform_name);
+   std::string GetName() const;
 
 protected:
    static constexpr char DEFAULT_SHADER_NAME[] = "_UNNAMED_SHADER_";
