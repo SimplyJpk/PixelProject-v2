@@ -1,8 +1,8 @@
 # PixelProject-v2
 
-A redux of PixelProject, after many many many many months of losing interest and no new ideas for other projects to start, I've decided to march down the road of insanity and throwing most of the previous project to the side. I'll pick and pull it apart taking what I liked and re-doing certain elements I think I could do better with my improved c++ knowledge from the start and a better understanding for what I want the final thing to look like.
+A reimagined version of PixelProject, designed to showcase the latest advancements in my C++ skills and creativity. This project is an opportunity for me to take what worked well in the original PixelProject and build upon it, while also incorporating new ideas and improvements.
 
-The project purpose remains the same, mostly just for refining my C++ knowledge, and seeing what I can do. I've opt'ed this time to use Rider as it has limited c++ support, but also means I can continue to pretend that cmake doesn't exist and utilize sweet sweet nugets.
+I've chosen to use Rider for this project, which offers limited support for C++ but allows me to leverage its built-in packages and simplify the development process. The ultimate goal of PixelProject-v2 is to continue honing my C++ knowledge and create a polished, functional project.
 
 ## Build
 
