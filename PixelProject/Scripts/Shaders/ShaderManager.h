@@ -70,7 +70,7 @@ private:
    ShaderManager() = default;
    ~ShaderManager() = default;
    
-   static constexpr std::string SHADER_FILE_EXT[SHADER_TYPES_COUNT] = { "vert", "frag", "geom", "tesse", "tessc", "comp" };
+   const std::string SHADER_FILE_EXT[SHADER_TYPES_COUNT] = { "vert", "frag", "geom", "tesse", "tessc", "comp" };
 
    std::unordered_map<std::string, GLint> _program_id;
    std::unordered_map<GLint, std::string> _program_name;

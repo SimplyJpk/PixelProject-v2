@@ -196,7 +196,7 @@ Shader* ShaderManager::GetDefaultShader() const
 
 constexpr int ShaderManager::GetShaderIndex(const ShaderTypes gl_shader_type)
 {
-   switch (gl_shader_type) {
+   switch (static_cast<int>(gl_shader_type)) {
    case GL_VERTEX_SHADER:
       return 0;
    case GL_FRAGMENT_SHADER:
@@ -216,7 +216,7 @@ constexpr int ShaderManager::GetShaderIndex(const ShaderTypes gl_shader_type)
 
 constexpr ShaderMask ShaderManager::GetShaderMask(const ShaderTypes gl_shader_type)
 {
-   switch (gl_shader_type) {
+   switch (static_cast<int>(gl_shader_type)) {
    case GL_VERTEX_SHADER:
       return ShaderMask::MVertex;
    case GL_FRAGMENT_SHADER:
