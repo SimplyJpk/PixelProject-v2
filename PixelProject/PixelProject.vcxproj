@@ -269,5 +269,7 @@
         <Error Condition="!Exists('..\packages\boost_exception-vc142.1.76.0.0\build\boost_exception-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_exception-vc142.1.76.0.0\build\boost_exception-vc142.targets'))" />
         <Error Condition="!Exists('..\packages\boost_filesystem-vc142.1.76.0.0\build\boost_filesystem-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_filesystem-vc142.1.76.0.0\build\boost_filesystem-vc142.targets'))" />
         <Error Condition="!Exists('..\packages\boost_thread-vc142.1.76.0.0\build\boost_thread-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_thread-vc142.1.76.0.0\build\boost_thread-vc142.targets'))" />
+        <Error Condition="!Exists('..\packages\fmt.7.0.1\build\fmt.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\fmt.7.0.1\build\fmt.targets'))" />
     </Target>
+    <Import Project="..\packages\fmt.7.0.1\build\fmt.targets" Condition="Exists('..\packages\fmt.7.0.1\build\fmt.targets')" />
 </Project>

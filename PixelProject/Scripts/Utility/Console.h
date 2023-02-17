@@ -2,6 +2,7 @@
 
 #include <string>
 #include <filesystem>
+#include <fmt/format.h>
 
 #if defined(_WIN64)
 #include <windows.h>
@@ -39,18 +40,29 @@ public:
    static void PrintError(const std::string& message) { PrintText("[ERROR] " + message, ConsoleColour::RED); }
    static void PrintSuccess(const std::string& message) { PrintText("[SUCCESS] " + message, ConsoleColour::GREEN); }
 
+   // Info log that will remain in a release mode build
+   #  define INFO_LOG(message, ...) Console::PrintInfo(fmt::format((message), __VA_ARGS__))
+   
    #if defined(_DEBUG)
    // Method that returns just the filename from a full path
    #  define FILE_NAME std::filesystem::path(__FILE__).filename().string()
    // Uses PrintInfo to print message. Only in debug mode, and stripped out in release mode
-   #  define DEBUG_LOG(message) Console::PrintInfo((message))
+   #  define DEBUG_LOG(message, ...) Console::PrintInfo(fmt::format((message), __VA_ARGS__))
    // Uses PrintInfo but includes [FileName:LineNumber] at the end of the message. Only in debug mode, and stripped out in release mode
-   #  define DEBUG_FULL_LOG(message) Console::PrintInfo(std::string(message) + " [" + std::string(FILE_NAME) + ": " + std::to_string(__LINE__) + "]")
+   #  define DEBUG_FULL_LOG(message, ...) Console::PrintInfo(fmt::format((message), __VA_ARGS__) + " [" + std::string(FILE_NAME) + ": " + std::to_string(__LINE__) + "]")
+   // Success Debug Log
+   #  define DEBUG_SUCCESS_LOG(message, ...) Console::PrintSuccess(fmt::format((message), __VA_ARGS__))
+   // Warning Debug Log
+   #  define DEBUG_WARNING_LOG(message, ...) Console::PrintWarning(fmt::format((message), __VA_ARGS__))
    #else
    // Stripped out in release mode
    #  define DEBUG_LOG(message)
    // Stripped out in release mode
    #  define DEBUG_FULL_LOG(message)
+   // Stripped out in release mode
+   #  define DEBUG_SUCCESS_LOG(message)
+   // Stripped out in release mode
+   #  define DEBUG_WARNING_LOG(message)
    #endif
    
 protected:
