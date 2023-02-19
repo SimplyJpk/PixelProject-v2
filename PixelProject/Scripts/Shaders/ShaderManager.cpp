@@ -1,4 +1,6 @@
 ﻿#include "ShaderManager.h"
+
+#include "Utility/Console.h"
 #include "Utility/FileIO.h"
 
 using namespace PixelProject;
@@ -148,8 +150,11 @@ bool ShaderManager::ShaderFromFiles(const uint8_t shader_mask, const std::string
    {
       if (stride & shader_mask)
       {
-         if (ShaderFromFile(static_cast<ShaderTypes>(index), name, file_name + "." + SHADER_FILE_EXT[index]))
+         if (ShaderFromFile(SHADER_TYPES[index], name, file_name + "." + SHADER_FILE_EXT[index]))
+         {
             shaders_loaded++;
+            DEBUG_SUCCESS_LOG("ShaderManager::ShaderFromFiles() : Loaded {} Shader '{}' from file '{}'", SHADER_TYPE_NAMES[index], name, file_name + "." + SHADER_FILE_EXT[index]);
+         }
       }
       stride >>= 1;
       index--;

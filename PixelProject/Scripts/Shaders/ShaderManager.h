@@ -13,6 +13,12 @@ enum class ShaderMask : uint8_t
    MTessControl = 1 << 4,
    MCompute = 1 << 5
 };
+template<typename... ShaderMask>
+static constexpr uint8_t GetShaderMask(ShaderMask... args)
+{
+   return (static_cast<uint8_t>(args) | ...);
+}
+
 static constexpr int SHADER_MASK_MAX_STRIDE = static_cast<int>(ShaderMask::MCompute);
 
 enum class ShaderTypes : GLint
@@ -24,6 +30,9 @@ enum class ShaderTypes : GLint
    TessControl = GL_TESS_CONTROL_SHADER,
    Compute = GL_COMPUTE_SHADER
 };
+
+static constexpr ShaderTypes SHADER_TYPES[6] = { ShaderTypes::Vertex, ShaderTypes::Fragment, ShaderTypes::Geometry, ShaderTypes::TessEval, ShaderTypes::TessControl, ShaderTypes::Compute };
+static constexpr const char* SHADER_TYPE_NAMES[6] = { "Vertex", "Fragment", "Geometry", "Tessellation Evaluation", "Tessellation Control", "Compute" };
 
 class ShaderManager
 {
