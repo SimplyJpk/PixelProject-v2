@@ -178,6 +178,9 @@
         <ClCompile Include="Scripts\Shaders\ShaderManager.cpp" />
         <ClCompile Include="Scripts\UI\UIManager.cpp" />
         <ClCompile Include="Scripts\Utility\Console.cpp" />
+        <ClCompile Include="Scripts\World\Chunk\WorldChunk.cpp" />
+        <ClCompile Include="Scripts\World\Pixels\Base\BasePixel.cpp">
+        <ClCompile Include="Scripts\World\Pixels\WorldDataHandler.cpp" />
         <ClCompile Include="SDL_FontCache\SDL_FontCache.c" />
     </ItemGroup>
     <ItemGroup>
@@ -214,6 +217,15 @@
         <ClInclude Include="Scripts\Utility\BitWise.h" />
         <ClInclude Include="Scripts\Utility\Console.h" />
         <ClInclude Include="Scripts\Utility\FileIO.h" />
+        <ClInclude Include="Scripts\World\Chunk\ChunkSupport.h" />
+        <ClInclude Include="Scripts\World\Chunk\WorldChunk.h" />
+        <ClInclude Include="Scripts\World\Pixels\Base\BasePixel.h" />
+        <ClInclude Include="Scripts\World\Pixels\PixelTypes.h" />
+        <ClInclude Include="Scripts\World\Pixels\Types\DirtPixel.h" />
+        <ClInclude Include="Scripts\World\Pixels\Types\SandPixel.h" />
+        <ClInclude Include="Scripts\World\Pixels\Types\SpacePixel.h" />
+        <ClInclude Include="Scripts\World\Pixels\WorldDataHandler.h" />
+        <ClInclude Include="Scripts\World\WorldConstants.h" />
     </ItemGroup>
     <ItemGroup>
         <None Include="packages.config" />
