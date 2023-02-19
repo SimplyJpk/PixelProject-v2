@@ -3,16 +3,16 @@
 
 FlyCamera::FlyCamera()
 {
-   auto input = InputManager::GetInstance();
+   const auto input = InputManager::GetInstance();
 
-   auto handleKeyFunction = std::bind(&FlyCamera::HandleKeyMovement, this, std::placeholders::_1, std::placeholders::_2);
+   const auto handleKeyFunction = std::bind(&FlyCamera::HandleKeyMovement, this, std::placeholders::_1, std::placeholders::_2);
    for (auto keyMovement : KEY_MOVEMENT)
    {
       input->AddKeyListener(keyMovement.GetKeyAsKeyCode(), std::to_string(keyMovement.GetHash()), handleKeyFunction);
       _key_pressed[keyMovement.GetKeyAsKeyCode()] = false;
    }
 
-   auto shiftKeyFunc = std::bind(&FlyCamera::HandleKeyShift, this, std::placeholders::_1, std::placeholders::_2);
+   const auto shiftKeyFunc = std::bind(&FlyCamera::HandleKeyShift, this, std::placeholders::_1, std::placeholders::_2);
    for (auto shiftKey: SHIFT_KEYS)
    {
       input->AddKeyListener(shiftKey, SHIFT_KEY_INPUT_KEY, shiftKeyFunc);
@@ -57,18 +57,14 @@ void FlyCamera::Update(float deltaTime)
 
       SetPosition(_position);
    }
-   
-   DEBUG_FULL_LOG("Camera position: " + std::to_string(_position.x) + ", " + std::to_string(_position.y) + ", " + std::to_string(_position.z));
 }
 
 void FlyCamera::HandleKeyMovement(SDL_Event& event, const bool is_pressed)
 {
    _key_pressed[static_cast<KeyCode>(event.key.keysym.scancode)] = is_pressed;
-   DEBUG_FULL_LOG("Key pressed: " + std::to_string(event.key.keysym.sym) + " Pressed:" + std::to_string(is_pressed));
 }
 
 void FlyCamera::HandleKeyShift(SDL_Event& event, const bool is_pressed)
 {
    _shift_held = is_pressed;
-   DEBUG_FULL_LOG("Shift pressed: " + std::to_string(is_pressed) + " Pressed: " + std::to_string(is_pressed));
 }
