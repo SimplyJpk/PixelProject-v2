@@ -6,6 +6,8 @@
 #include "Input/InputManager.h"
 #include "Camera/FlyCamera.h"
 
+#include "Config/GameSettings.h"
+
 using namespace PixelProject::Input;
 
 class Game
@@ -13,7 +15,7 @@ class Game
 public:
    ~Game() = default;
 
-   Game(SDL_GLContext* gl_context, SDL_Window* gl_window);
+   Game(SDL_GLContext* gl_context, SDL_Window* gl_window, std::unique_ptr<GameSettings>& settings);
    bool Initialize();
 
    /// @brief Runs the game loop, this won't return until the application is closed
@@ -43,4 +45,6 @@ protected:
 private:
    Game() = default;
    bool _is_running = true;
+   
+   std::unique_ptr<GameSettings> _settings;
 };

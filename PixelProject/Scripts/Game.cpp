@@ -5,10 +5,13 @@
 
 #include "Config/ConfigFile.h"
 
-Game::Game(SDL_GLContext* gl_context, SDL_Window* gl_window)
+#include "Shaders/ShaderManager.h"
+
+Game::Game(SDL_GLContext* gl_context, SDL_Window* gl_window, std::unique_ptr<GameSettings>& settings)
 {
    _context = gl_context;
    _window = gl_window;
+   _settings = std::move(settings);
 
    _ui_manager = UIManager::GetInstance();
 }
@@ -20,7 +23,16 @@ bool Game::Initialize()
 
    glViewport(0, 0, 1280, 720);
 
+   // Shaders
+   const auto shaderManager = ShaderManager::GetInstance();
+   Shader* defaultShader = shaderManager->CreateShaderProgramFromFiles(
+      GetShaderMask(ShaderMask::MVertex, ShaderMask::MFragment), "orthoWorld", "shaders/orthoWorld");
+   shaderManager->SetDefaultShader(defaultShader);
+   
+   // Input System
    _input_manager = InputManager::GetInstance();
+   
+   // User Interface
    _ui_manager->Init(_window, _context);
 
    _camera = new FlyCamera();

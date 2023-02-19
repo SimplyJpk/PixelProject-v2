@@ -36,7 +36,10 @@ int main(int argc, char* argv[])
    if (!CreateWindowAndContext())
       success = false;
 
-   Game game(&g_context, g_window);
+   // Once window is prepared, load game settings
+   auto gameSettings = std::make_unique<GameSettings>();
+   gameSettings->LoadSettings(g_config);
+   Game game(&g_context, g_window, gameSettings);
    if (!success || !game.Initialize())
    {
       Console::PrintError("PixelProject failed to initialize!\n");
