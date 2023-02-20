@@ -5,10 +5,10 @@
 class SpacePixel final : public BasePixel
 {
 public:
-   constexpr SpacePixel()
+   SpacePixel()
    {
       pixel_type = Pixels::PixelType::Space;
-      SetPixelName("Space");
+      SET_PIXEL_NAME("Space");
       is_updateable = false;
 
       colour_count = 1;
@@ -17,7 +17,7 @@ public:
 
       _pixel_update_order_count = 0;
 
-      rng = XoshiroCpp::Xoshiro128Plus(static_cast<int>(pixel_type));
+      distribution = std::uniform_int_distribution<int>(0, colour_count);
    }
    
 };

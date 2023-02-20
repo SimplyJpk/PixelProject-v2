@@ -13,7 +13,7 @@ const uint8_t& BasePixel::GetPixelUpdateOrder()
    return *_pixel_update_order[_chunk_order_counter];
 }
 
-void BasePixel::InsertPixelUpdateOrder(const uint8_t index, const std::vector<Chunk::WorldDir>& directions)
+constexpr void BasePixel::InsertPixelUpdateOrder(const uint8_t index, const std::vector<Chunk::WorldDir>& directions)
 {
    if (index < Pixels::PIXEL_MAX_UPDATE_ORDER_COUNT)
    {
@@ -27,23 +27,15 @@ void BasePixel::InsertPixelUpdateOrder(const uint8_t index, const std::vector<Ch
    }
 }
 
-void BasePixel::InsertPixelUpdateOrder(const std::vector<std::vector<Chunk::WorldDir>>& directions)
-{
-   for (auto i = 0; i < directions.size(); i++)
-   {
-      InsertPixelUpdateOrder(static_cast<uint8_t>(i), directions[i]);
-   }
-}
-
 void BasePixel::SetPixelName(const char* const name)
 {
    if (strlen(name) > 0)
    {
-      strcpy_s(pixel_name, Pixels::PIXEL_MAX_UPDATE_ORDER_COUNT, name);
+      strcpy_s(pixel_name.data(), Pixels::PIXEL_MAX_UPDATE_ORDER_COUNT, name);
    }
 }
 
 Uint32 BasePixel::GetRandomColour()
 {
-   return type_colours[rng() % colour_count];
+   return type_colours[distribution(rand_engine)];
 }

@@ -7,10 +7,10 @@ using namespace Chunk;
 class SandPixel final : public BasePixel
 {
 public:
-   constexpr SandPixel()
+   SandPixel()
    {
       pixel_type = Pixels::PixelType::Sand;
-      SetPixelName("Sand");
+      SET_PIXEL_NAME("Sand");
       is_updateable = true;
 
       colour_count = 3;
@@ -19,14 +19,17 @@ public:
       type_colours[1] = 0xE8BB9AFF;
       type_colours[2] = 0xEDC9AFFF;
 
-      _pixel_update_order_count = 1;
-      InsertPixelUpdateOrder(
-         {
-            {  WorldDir::South, WorldDir::SouthEast, WorldDir::South},
-            {  WorldDir::South, WorldDir::SouthWest, WorldDir::South}
-         });
+      _pixel_update_order_count = 2;
+      SET_PIXEL_UPDATE_ORDER(0, WorldDir::South, WorldDir::SouthEast, WorldDir::SouthWest);
+      SET_PIXEL_UPDATE_ORDER(1, WorldDir::South, WorldDir::SouthWest, WorldDir::SouthEast);
+      
+      // InsertPixelUpdateOrder(
+      //    {
+      //       {  WorldDir::South, WorldDir::SouthEast, WorldDir::South},
+      //       {  WorldDir::South, WorldDir::SouthWest, WorldDir::South}
+      //    });
 
-      rng = XoshiroCpp::Xoshiro128Plus(static_cast<int>(pixel_type));
+      distribution = std::uniform_int_distribution<int>(0, colour_count);
    }
    
 };

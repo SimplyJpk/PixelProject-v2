@@ -5,10 +5,10 @@
 class DirtPixel final : public BasePixel
 {
 public:
-   constexpr DirtPixel()
+   DirtPixel()
    {
       pixel_type = Pixels::PixelType::Dirt;
-      SetPixelName("Dirt");
+      SET_PIXEL_NAME("Dirt");
       is_updateable = false;
 
       colour_count = 3;
@@ -19,9 +19,6 @@ public:
 
       _pixel_update_order_count = 0;
 
-      rng = XoshiroCpp::Xoshiro128Plus(static_cast<int>(pixel_type));
+      distribution = std::uniform_int_distribution<int>(0, colour_count);
    }
 };
-
-
-2 : 2
