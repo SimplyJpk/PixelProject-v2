@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include <typeindex>
 #include <unordered_map>
 
 #include "PixelTypes.h"
@@ -8,7 +7,7 @@
 class WorldDataHandler
 {
 public:
-   static WorldDataHandler& GetInstance();
+   static WorldDataHandler* GetInstance();
 
    // TODO : (James) Utility functions
    // std::string GetPixelName(const Pixels::PixelType& pixel_type) const;
@@ -20,12 +19,12 @@ public:
    Uint32 GetPixelColour(const Pixels::PixelType& pixel_type) const;
    
    WorldDataHandler(const WorldDataHandler&) = delete;
-   WorldDataHandler(WorldDataHandler&&) = delete;
+   WorldDataHandler(WorldDataHandler&&) = delete;  
    void operator=(const WorldDataHandler&) = delete;
    void operator=(WorldDataHandler&&) = delete;
    
 protected:
-   constexpr WorldDataHandler();
+   WorldDataHandler();
 
 private:
    ~WorldDataHandler() = default;
@@ -34,6 +33,6 @@ private:
    std::array<BasePixel, Pixels::PIXEL_TYPE_COUNT> _pixel_types;
 
    // utility structures for fast lookup and iteration
-   std::unordered_map<Uint32, BasePixel&> _pixel_colour_map;
-   std::unordered_map<Pixels::PixelType, BasePixel&> _pixel_type_map;
+   std::unordered_map<Uint32, BasePixel*> _pixel_colour_map;
+   std::unordered_map<Pixels::PixelType, BasePixel*> _pixel_type_map;
 };
