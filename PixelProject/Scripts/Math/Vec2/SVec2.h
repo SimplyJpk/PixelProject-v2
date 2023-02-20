@@ -10,6 +10,12 @@ struct SVec2
    SVec2();
    SVec2(const short x, const short y);
 
+   template <class Archive>
+   void serialize(Archive& archive)
+   {
+      archive(x, y);
+   }
+   
 #pragma region STATIC_CONSTANTS
 
    static SVec2 Zero() INLINE_RETURN(SVec2(0, 0))

@@ -10,6 +10,12 @@ struct Vec2
    Vec2();
    Vec2(const float x, const float y);
 
+   template <class Archive>
+   void serialize(Archive& archive)
+   {
+      archive(x, y);
+   }
+   
 #pragma region STATIC_CONSTANTS
 
    static Vec2 Zero() INLINE_RETURN(Vec2(0.0f, 0.0f))

@@ -11,6 +11,12 @@ struct IVec2
    IVec2();
    IVec2(const int x, const int y);
 
+   template <class Archive>
+   void serialize(Archive& archive)
+   {
+      archive(x, y);
+   }
+
 #pragma region STATIC_CONSTANTS
 
    static IVec2 Zero() INLINE_RETURN(IVec2(0, 0))
