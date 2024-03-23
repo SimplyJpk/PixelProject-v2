@@ -9,17 +9,21 @@ void Camera::Update(float delta)
 void Camera::SetOrthographic(float left, float right, float bottom, float top, float near, float far)
 {
     _projection_matrix = glm::ortho(left, right, bottom, top, near, far);
+    _dirty = true;
 }
 
 void Camera::SetPerspective(float fov, float aspectRatio, float near, float far)
 {
     _projection_matrix = glm::perspective(fov, aspectRatio, near, far);
+    _dirty = true;
 }
 
 void Camera::SetPosition(const glm::vec3& position)
 {
-    _world_transform[3] = glm::vec4(position, 1);
+    _position = position;
+    _world_transform[3] = glm::vec4(_position, 1);
     _view_matrix = glm::inverse(_world_transform);
+    _dirty = true;
 }
 
 const glm::mat4& Camera::GetViewMatrix() const

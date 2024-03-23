@@ -33,7 +33,6 @@ public:
    void RemoveKeyListener(KeyCode key_code, const std::string& name);
    void RemoveKeyListeners(const std::vector<KeyCode>& key_codes, const std::string& name);
    
-
    void AddMouseListener(MouseCode mouse_button, const std::string& name, const InputCallback& callback);
    void RemoveMouseListener(MouseCode mouse_button, const std::string& name);
 
@@ -64,7 +63,10 @@ protected:
    void ClearInputStates();
 
    std::unordered_map<KeyCode, InputEventContainer*> _key_change_map;
+   std::unordered_map<KeyCode, SDL_Event> _is_held_with_listener;
+   
    std::unordered_map<MouseCode, InputEventContainer*> _mouse_change_map;
+   std::unordered_map<MouseCode, SDL_Event> _is_mouse_held_with_listener;
    
 private:
    InputManager() = default;

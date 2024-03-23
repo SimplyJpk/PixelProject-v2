@@ -7,7 +7,7 @@ class SpacePixel final : public BasePixel
 public:
    SpacePixel()
    {
-      pixel_type = Pixels::PixelType::Space;
+      pixel_type = Pixel::PixelType::Space;
       SET_PIXEL_NAME("Space");
       is_updateable = false;
 
@@ -17,7 +17,8 @@ public:
 
       _pixel_update_order_count = 0;
 
-      distribution = std::uniform_int_distribution<int>(0, colour_count);
+      distribution = std::uniform_int_distribution<int>(0, colour_count - 1);
+      
    }
    
 };

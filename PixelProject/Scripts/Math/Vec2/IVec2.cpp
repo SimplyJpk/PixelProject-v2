@@ -6,13 +6,18 @@ IVec2::IVec2()
    y = 0;
 }
 
-IVec2::IVec2(const int x, const int y): x(x), y(y)
+constexpr IVec2::IVec2(const int x, const int y): x(x), y(y)
 {
 }
 
 IVec2 IVec2::operator+(const IVec2& rhs) const
 {
    return {x + rhs.x, y + rhs.y};
+}
+
+IVec2 IVec2::operator-(const IVec2& rhs) const
+{
+   return {x - rhs.x, y - rhs.y};
 }
 
 IVec2& IVec2::operator=(const IVec2 other)
@@ -26,6 +31,13 @@ IVec2& IVec2::operator+=(const IVec2& vec2)
 {
    x += vec2.x;
    y += vec2.y;
+   return *this;
+}
+
+IVec2& IVec2::operator-=(const IVec2& vec2)
+{
+   x -= vec2.x;
+   y -= vec2.y;
    return *this;
 }
 

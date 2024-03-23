@@ -2,7 +2,6 @@
 
 #include <string>
 #include <filesystem>
-#include <fmt/format.h>
 
 #if defined(_WIN64)
 #include <windows.h>
@@ -41,19 +40,22 @@ public:
    static void PrintSuccess(const std::string& message) { PrintText("[SUCCESS] " + message, ConsoleColour::GREEN); }
 
    // Info log that will remain in a release mode build
-   #  define INFO_LOG(message, ...) Console::PrintInfo(fmt::format((message), __VA_ARGS__))
+   #  define INFO_LOG(message, ...) Console::PrintInfo(std::format((message), __VA_ARGS__))
+
+   # define LOG_ERROR(message, ...) Console::PrintError(std::format((message), __VA_ARGS__))
+   # define LOG_WARNING(message, ...) Console::PrintWarning(std::format((message), __VA_ARGS__))
    
-   #if defined(_DEBUG)
+   #if defined(PIXEL_PROJECT_DEBUG)
    // Method that returns just the filename from a full path
    #  define FILE_NAME std::filesystem::path(__FILE__).filename().string()
    // Uses PrintInfo to print message. Only in debug mode, and stripped out in release mode
-   #  define DEBUG_LOG(message, ...) Console::PrintInfo(fmt::format((message), __VA_ARGS__))
+   #  define DEBUG_LOG(message, ...) Console::PrintInfo(std::format((message), __VA_ARGS__))
    // Uses PrintInfo but includes [FileName:LineNumber] at the end of the message. Only in debug mode, and stripped out in release mode
-   #  define DEBUG_FULL_LOG(message, ...) Console::PrintInfo(fmt::format((message), __VA_ARGS__) + " [" + std::string(FILE_NAME) + ": " + std::to_string(__LINE__) + "]")
+   #  define DEBUG_FULL_LOG(message, ...) Console::PrintInfo(std::format((message), __VA_ARGS__) + " [" + std::string(FILE_NAME) + ": " + std::to_string(__LINE__) + "]")
    // Success Debug Log
-   #  define DEBUG_SUCCESS_LOG(message, ...) Console::PrintSuccess(fmt::format((message), __VA_ARGS__))
+   #  define DEBUG_SUCCESS_LOG(message, ...) Console::PrintSuccess(std::format((message), __VA_ARGS__))
    // Warning Debug Log
-   #  define DEBUG_WARNING_LOG(message, ...) Console::PrintWarning(fmt::format((message), __VA_ARGS__))
+   #  define DEBUG_WARNING_LOG(message, ...) Console::PrintWarning(std::format((message), __VA_ARGS__))
    #else
    // Stripped out in release mode
    #  define DEBUG_LOG(message)

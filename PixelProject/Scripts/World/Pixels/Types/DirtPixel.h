@@ -7,7 +7,7 @@ class DirtPixel final : public BasePixel
 public:
    DirtPixel()
    {
-      pixel_type = Pixels::PixelType::Dirt;
+      pixel_type = Pixel::PixelType::Dirt;
       SET_PIXEL_NAME("Dirt");
       is_updateable = false;
 
@@ -19,6 +19,14 @@ public:
 
       _pixel_update_order_count = 0;
 
-      distribution = std::uniform_int_distribution<int>(0, colour_count);
+      distribution = std::uniform_int_distribution<int>(0, colour_count - 1);
+
+      // update_function = static_cast<UpdateFunction>(&DirtPixel::PixelUpdate);
    }
+
+   // void PixelUpdate(PixelUpdateResult& result)
+   // {
+   //    result.Fail();
+   // }
+   
 };

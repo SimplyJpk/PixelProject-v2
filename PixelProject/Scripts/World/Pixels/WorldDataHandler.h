@@ -3,6 +3,7 @@
 #include <unordered_map>
 
 #include "PixelTypes.h"
+#include "Rendering/Shaders/Shader.h"
 
 class WorldDataHandler
 {
@@ -13,10 +14,13 @@ public:
    // std::string GetPixelName(const Pixels::PixelType& pixel_type) const;
    // const BasePixel& GetPixelFromColour(const Uint32& colour) const;
 
-   // const BasePixel& GetPixelFromIndex(const uint8_t index) const;
+   BasePixel* GetPixelFromIndex(const uint8_t index);
+   BasePixel* GetPixelFromType(const Pixel::PixelType& pixel_type) const;
 
-   const uint8_t& GetRandomPixelUpdateOrder(Pixels::PixelType pixel_type) const;
-   Uint32 GetPixelColour(const Pixels::PixelType& pixel_type) const;
+   const std::array<uint8_t, 8>& GetRandomPixelUpdateOrder(Pixel::PixelType pixel_type) const;
+   Uint32 GetPixelColour(const Pixel::PixelType& pixel_type) const;
+
+   void SetUniformData(Shader* shader);
    
    WorldDataHandler(const WorldDataHandler&) = delete;
    WorldDataHandler(WorldDataHandler&&) = delete;  
@@ -30,9 +34,9 @@ private:
    ~WorldDataHandler() = default;
 
    // Main array holding pixel types in contiguous memory
-   std::array<BasePixel, Pixels::PIXEL_TYPE_COUNT> _pixel_types;
+   std::array<BasePixel, Pixel::TYPE_COUNT> _pixel_types;
 
    // utility structures for fast lookup and iteration
    std::unordered_map<Uint32, BasePixel*> _pixel_colour_map;
-   std::unordered_map<Pixels::PixelType, BasePixel*> _pixel_type_map;
+   std::unordered_map<Pixel::PixelType, BasePixel*> _pixel_type_map;
 };

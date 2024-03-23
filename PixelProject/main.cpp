@@ -2,7 +2,6 @@
 #include <SDL.h>
 
 #include <iostream>
-#include <format>
 
 #include "Game.h"
 #include "Config/ConfigFile.h"
@@ -37,7 +36,7 @@ int main(int argc, char* argv[])
       success = false;
 
    // Once window is prepared, load game settings
-   auto gameSettings = std::make_unique<GameSettings>();
+   auto gameSettings = std::make_shared<GameSettings>();
    gameSettings->LoadSettings(g_config);
    Game game(&g_context, g_window, gameSettings);
    if (!success || !game.Initialize())
@@ -104,7 +103,7 @@ bool CreateWindowAndContext()
       {
          Console::PrintWarning(std::string("Unable to set VSync! SDL Error: %s\n", SDL_GetError()));
       }
-      glClearColor(0.01f, 0.01f, 0.01f, 1.0f);
+      glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
    }
    return success;
 }

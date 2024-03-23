@@ -25,8 +25,25 @@ void InputManager::Update()
    ClearInputStates();
    
    if (SDL_PollEvent(nullptr) == 0)
-      return;
+   {
+      // _is_held_with_listener
+      for (auto& [key, event] : _is_held_with_listener)
+      {
+         event.motion.x = _mouse_x_pos;
+         event.motion.y = _mouse_y_pos;
+         _key_change_map[key]->Invoke(event, true);
+      }
 
+      for (auto& [mouse, event] : _is_mouse_held_with_listener)
+      {
+         event.motion.x = _mouse_x_pos;
+         event.motion.y = _mouse_y_pos;
+         _mouse_change_map[mouse]->Invoke(event, true);
+      }
+      
+      return;
+   }
+   
    SDL_Event event;
    while (SDL_PollEvent(&event))
    {
@@ -46,7 +63,10 @@ void InputManager::Update()
          _is_key_held[static_cast<int>(keyCode)] = true;
          
          if (_key_change_map.contains(keyCode))
+         {
             _key_change_map[keyCode]->Invoke(event, true);
+            _is_held_with_listener[keyCode] = event;
+         }
          break;
       case SDL_KEYUP:
          _is_key_up[static_cast<int>(keyCode)] = true;
@@ -54,7 +74,10 @@ void InputManager::Update()
          _is_key_held[static_cast<int>(keyCode)] = false;
          
          if (_key_change_map.contains(keyCode))
+         {
             _key_change_map[keyCode]->Invoke(event, false);
+            _is_held_with_listener.erase(keyCode);
+         }
          break;
       case SDL_MOUSEMOTION:
          _mouse_x_pos = event.motion.x;
@@ -68,7 +91,10 @@ void InputManager::Update()
          _is_mouse_down_dirty = true;
 
          if (_mouse_change_map.contains(mouseCode))
+         {
             _mouse_change_map[mouseCode]->Invoke(event, true);
+            _is_mouse_held_with_listener[mouseCode] = event;
+         }
          break;
 
       case SDL_MOUSEBUTTONUP:
@@ -77,7 +103,10 @@ void InputManager::Update()
          _is_mouse_up_dirty = true;
 
          if (_mouse_change_map.contains(mouseCode))
+         {
             _mouse_change_map[mouseCode]->Invoke(event, false);
+            _is_mouse_held_with_listener.erase(mouseCode);
+         }
          break;
 
       case SDL_MOUSEWHEEL:
@@ -180,6 +209,10 @@ void InputManager::RemoveKeyListener(const KeyCode key_code, const std::string& 
 {
    if (_key_change_map.contains(key_code))
       _key_change_map[key_code]->RemoveListener(name);
+
+   // If there are no listeners for this key, remove it from the held map to improve performance
+   if (_key_change_map[key_code]->GetListenerCount() == 0)
+      _is_held_with_listener.erase(key_code);
 }
 
 void InputManager::RemoveKeyListeners(const std::vector<KeyCode>& key_codes, const std::string& name)
@@ -199,6 +232,10 @@ void InputManager::RemoveMouseListener(const MouseCode mouse_button, const std::
 {
    if (_mouse_change_map.contains(mouse_button))
       _mouse_change_map[mouse_button]->RemoveListener(name);
+
+   // If there are no listeners for this key, remove it from the held map to improve performance
+   if (_mouse_change_map[mouse_button]->GetListenerCount() == 0)
+      _is_mouse_held_with_listener.erase(mouse_button);
 }
 
 #pragma endregion Listeners

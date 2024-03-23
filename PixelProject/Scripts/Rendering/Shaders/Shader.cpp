@@ -1,6 +1,7 @@
 ﻿#include "Shader.h"
 #include <unordered_map>
 #include <stdexcept>
+#include "Utility/Console.h"
 
 Shader::Shader(const GLuint program_id)
     : _program(program_id), _name(DEFAULT_SHADER_NAME)
@@ -38,15 +39,15 @@ GLuint Shader::GetUniformLocation(const std::string& uniform_name)
    }
 
    // Check if exists in shader
-   auto pos = glGetUniformLocation(_program, uniform_name.c_str());
+   const auto pos = glGetUniformLocation(_program, uniform_name.c_str());
    if (pos != -1)
    {
-      _uniform_locations.insert({ uniform_name, pos });
-      return pos;
+      _uniform_locations[uniform_name] = pos;
+      return _uniform_locations[uniform_name];
    }
 
    // Complain that it doesn't exist
-   throw std::runtime_error("Program [" + std::to_string(_program) + " '" + _name + "']: '" + uniform_name + "' does not exist.");
+   LOG_WARNING("Program [{} '{}']: '{}' does not exist.", _program, _name, uniform_name);
 }
 
 std::string Shader::GetName() const

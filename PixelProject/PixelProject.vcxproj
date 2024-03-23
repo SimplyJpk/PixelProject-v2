@@ -40,7 +40,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
         <ConfigurationType>Application</ConfigurationType>
-        <UseDebugLibraries>false</UseDebugLibraries>
         <PlatformToolset>v143</PlatformToolset>
         <WholeProgramOptimization>true</WholeProgramOptimization>
         <CharacterSet>Unicode</CharacterSet>
@@ -76,7 +75,7 @@
         <ClCompile>
             <WarningLevel>Level3</WarningLevel>
             <SDLCheck>true</SDLCheck>
-            <PreprocessorDefinitions>DEBUG_GAME;GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
+            <PreprocessorDefinitions>DEBUG_GAME;GLEW_STATIC;PIXEL_PROJECT_DEBUG;_CONSOLE;%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
             <ConformanceMode>true</ConformanceMode>
             <AdditionalIncludeDirectories>$(SolutionDir)Includes\;$(SolutionDir)Includes\SDL2\include;$(SolutionDir)Includes\imgui_sdl-master;$(SolutionDir)Includes\imgui-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
             <LanguageStandard>stdcpp20</LanguageStandard>
@@ -123,13 +122,14 @@
             <FunctionLevelLinking>true</FunctionLevelLinking>
             <IntrinsicFunctions>true</IntrinsicFunctions>
             <SDLCheck>true</SDLCheck>
-            <PreprocessorDefinitions>DEBUG_GAME;GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
+            <PreprocessorDefinitions>GLEW_STATIC;_CONSOLE;%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
             <ConformanceMode>true</ConformanceMode>
             <AdditionalIncludeDirectories>$(SolutionDir)Includes\;$(SolutionDir)Includes\SDL2\include;$(SolutionDir)Includes\imgui_sdl-master;$(SolutionDir)Includes\imgui-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
             <LanguageStandard>stdcpp20</LanguageStandard>
             <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
             <WholeProgramOptimization>false</WholeProgramOptimization>
             <MultiProcessorCompilation>true</MultiProcessorCompilation>
+            <RemoveUnreferencedCodeData>false</RemoveUnreferencedCodeData>
         </ClCompile>
         <Link>
             <SubSystem>Console</SubSystem>
@@ -166,21 +166,37 @@
         <ClCompile Include="main.cpp" />
         <ClCompile Include="Scripts\Camera\Camera.cpp" />
         <ClCompile Include="Scripts\Camera\FlyCamera.cpp" />
+        <ClCompile Include="Scripts\Debug\FpsTracker.cpp" />
         <ClCompile Include="Scripts\Debug\GLErrorCallback.cpp" />
+        <ClCompile Include="Scripts\Debug\Memory\MemoryUsage.cpp" />
+        <ClCompile Include="Scripts\Debug\Memory\MemoryUsage_linux.cpp" />
+        <ClCompile Include="Scripts\Debug\Memory\MemoryUsage_win.cpp" />
         <ClCompile Include="Scripts\Game.cpp" />
+        <ClCompile Include="Scripts\GameObject\GameObject.cpp" />
+        <ClCompile Include="Scripts\GameObject\Transform.cpp" />
         <ClCompile Include="Scripts\Input\InputContainer.cpp" />
         <ClCompile Include="Scripts\Input\InputManager.cpp" />
         <ClCompile Include="Scripts\Interfaces\ISerialize.cpp" />
         <ClCompile Include="Scripts\Math\Vec2\IVec2.cpp" />
         <ClCompile Include="Scripts\Math\Vec2\SVec2.cpp" />
         <ClCompile Include="Scripts\Math\Vec2\Vec2.cpp" />
-        <ClCompile Include="Scripts\Shaders\Shader.cpp" />
-        <ClCompile Include="Scripts\Shaders\ShaderManager.cpp" />
+        <ClCompile Include="Scripts\Rendering\Misc\TextureUtility.cpp" />
+        <ClCompile Include="Scripts\Rendering\Shaders\Shader.cpp" />
+        <ClCompile Include="Scripts\Rendering\Shaders\ShaderManager.cpp" />
+        <ClCompile Include="Scripts\Rendering\Sprite.cpp" />
+        <ClCompile Include="Scripts\Rendering\Texture.cpp" />
+        <ClCompile Include="Scripts\Rendering\VertexBufferObject.cpp" />
+        <ClCompile Include="Scripts\UI\Debug\DebugStats.cpp" />
+        <ClCompile Include="Scripts\UI\IDrawGUI.cpp" />
+        <ClCompile Include="Scripts\UI\Paint\PaintSelector.cpp" />
         <ClCompile Include="Scripts\UI\UIManager.cpp" />
         <ClCompile Include="Scripts\Utility\Console.cpp" />
         <ClCompile Include="Scripts\World\Chunk\WorldChunk.cpp" />
-        <ClCompile Include="Scripts\World\Pixels\Base\BasePixel.cpp">
+        <ClCompile Include="Scripts\World\Pixels\Base\BasePixel.cpp" />
+        <ClCompile Include="Scripts\World\Pixels\Base\PixelUpdateResult.cpp" />
         <ClCompile Include="Scripts\World\Pixels\WorldDataHandler.cpp" />
+        <ClCompile Include="Scripts\World\Utility\WorldGenerator.cpp" />
+        <ClCompile Include="Scripts\World\WorldSimulator.cpp" />
         <ClCompile Include="SDL_FontCache\SDL_FontCache.c" />
     </ItemGroup>
     <ItemGroup>
@@ -197,8 +213,14 @@
         <ClInclude Include="Scripts\Camera\FlyCamera.h" />
         <ClInclude Include="Scripts\Config\ConfigFile.h" />
         <ClInclude Include="Scripts\Config\GameSettings.h" />
+        <ClInclude Include="Scripts\Core\Events\Delegate.h" />
+        <ClInclude Include="Scripts\Debug\DebugAssertion.h" />
+        <ClInclude Include="Scripts\Debug\FpsTracker.h" />
         <ClInclude Include="Scripts\Debug\GLErrorCallback.h" />
+        <ClInclude Include="Scripts\Debug\Memory\MemoryUsage.h" />
         <ClInclude Include="Scripts\Game.h" />
+        <ClInclude Include="Scripts\GameObject\GameObject.h" />
+        <ClInclude Include="Scripts\GameObject\Transform.h" />
         <ClInclude Include="Scripts\Global\Constants.h" />
         <ClInclude Include="Scripts\Global\Defines.h" />
         <ClInclude Include="Scripts\Input\InputContainer.h" />
@@ -211,21 +233,36 @@
         <ClInclude Include="Scripts\Math\Vec2\IVec2.h" />
         <ClInclude Include="Scripts\Math\Vec2\SVec2.h" />
         <ClInclude Include="Scripts\Math\Vec2\Vec2.h" />
-        <ClInclude Include="Scripts\Shaders\Shader.h" />
-        <ClInclude Include="Scripts\Shaders\ShaderManager.h" />
+        <ClInclude Include="Scripts\Rendering\Misc\TextureFormatData.h" />
+        <ClInclude Include="Scripts\Rendering\Misc\TextureUtility.h" />
+        <ClInclude Include="Scripts\Rendering\Shaders\Shader.h" />
+        <ClInclude Include="Scripts\Rendering\Shaders\ShaderManager.h" />
+        <ClInclude Include="Scripts\Rendering\Sprite.h" />
+        <ClInclude Include="Scripts\Rendering\Texture.h" />
+        <ClInclude Include="Scripts\Rendering\VertexBufferObject.h" />
+        <ClInclude Include="Scripts\UI\Debug\DebugStats.h" />
+        <ClInclude Include="Scripts\UI\IDrawGUI.h" />
+        <ClInclude Include="Scripts\UI\Paint\PaintSelector.h" />
         <ClInclude Include="Scripts\UI\UIManager.h" />
         <ClInclude Include="Scripts\Utility\BitWise.h" />
         <ClInclude Include="Scripts\Utility\Console.h" />
         <ClInclude Include="Scripts\Utility\FileIO.h" />
         <ClInclude Include="Scripts\World\Chunk\ChunkSupport.h" />
         <ClInclude Include="Scripts\World\Chunk\WorldChunk.h" />
+        <ClInclude Include="Scripts\World\PixelMask.h" />
         <ClInclude Include="Scripts\World\Pixels\Base\BasePixel.h" />
+        <ClInclude Include="Scripts\World\Pixels\Base\PixelUpdateResult.h" />
         <ClInclude Include="Scripts\World\Pixels\PixelTypes.h" />
         <ClInclude Include="Scripts\World\Pixels\Types\DirtPixel.h" />
+        <ClInclude Include="Scripts\World\Pixels\Types\FirePixel.h" />
         <ClInclude Include="Scripts\World\Pixels\Types\SandPixel.h" />
         <ClInclude Include="Scripts\World\Pixels\Types\SpacePixel.h" />
+        <ClInclude Include="Scripts\World\Pixels\Types\WaterPixel.h" />
+        <ClInclude Include="Scripts\World\Pixels\Types\WoodPixel.h" />
         <ClInclude Include="Scripts\World\Pixels\WorldDataHandler.h" />
+        <ClInclude Include="Scripts\World\Utility\WorldGenerator.h" />
         <ClInclude Include="Scripts\World\WorldConstants.h" />
+        <ClInclude Include="Scripts\World\WorldSimulator.h" />
     </ItemGroup>
     <ItemGroup>
         <None Include="packages.config" />
@@ -244,6 +281,9 @@
     </ItemGroup>
     <ItemGroup>
         <Image Include="textures\brick.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Scripts\System\formatter\" />
     </ItemGroup>
     <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
     <ImportGroup Label="ExtensionTargets">
@@ -281,7 +321,5 @@
         <Error Condition="!Exists('..\packages\boost_exception-vc142.1.76.0.0\build\boost_exception-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_exception-vc142.1.76.0.0\build\boost_exception-vc142.targets'))" />
         <Error Condition="!Exists('..\packages\boost_filesystem-vc142.1.76.0.0\build\boost_filesystem-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_filesystem-vc142.1.76.0.0\build\boost_filesystem-vc142.targets'))" />
         <Error Condition="!Exists('..\packages\boost_thread-vc142.1.76.0.0\build\boost_thread-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_thread-vc142.1.76.0.0\build\boost_thread-vc142.targets'))" />
-        <Error Condition="!Exists('..\packages\fmt.7.0.1\build\fmt.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\fmt.7.0.1\build\fmt.targets'))" />
     </Target>
-    <Import Project="..\packages\fmt.7.0.1\build\fmt.targets" Condition="Exists('..\packages\fmt.7.0.1\build\fmt.targets')" />
 </Project>

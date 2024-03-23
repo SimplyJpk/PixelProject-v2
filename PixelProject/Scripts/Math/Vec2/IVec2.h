@@ -9,15 +9,16 @@ struct IVec2
    int y;
 
    IVec2();
-   IVec2(const int x, const int y);
-
+   constexpr IVec2(int x, int y);
+   constexpr IVec2(const short x, const short y) : x(static_cast<int>(x)), y(static_cast<int>(y)) {}
+   
    template <class Archive>
    void serialize(Archive& archive)
    {
       archive(x, y);
    }
 
-#pragma region STATIC_CONSTANTS
+   #pragma region STATIC_CONSTANTS
 
    static IVec2 Zero() INLINE_RETURN(IVec2(0, 0))
    static IVec2 One() INLINE_RETURN(IVec2(1, 1))
@@ -31,9 +32,11 @@ struct IVec2
 #pragma region OPPERATOR_OVERLOADS
 
    IVec2 operator+(const IVec2& rhs) const;
+   IVec2 operator-(const IVec2& rhs) const;
 
    IVec2& operator =(const IVec2 other);
    IVec2& operator+=(const IVec2& vec2);
+   IVec2& operator-=(const IVec2& vec2);
    bool operator==(const IVec2& vec2) const;
 
 #pragma endregion OPPERATOR_OVERLOADS
@@ -47,3 +50,15 @@ struct IVec2
 
 #pragma endregion FUNCTIONS
 };
+
+namespace std
+{
+   template <>
+   struct hash<IVec2>
+   {
+      size_t operator()(const IVec2& vec2) const
+      {
+         return hash<int>()(vec2.x) ^ hash<int>()(vec2.y);
+      }
+   };
+}

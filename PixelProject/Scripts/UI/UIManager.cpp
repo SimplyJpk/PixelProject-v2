@@ -27,6 +27,8 @@ void UIManager::Init(SDL_Window* window, SDL_GLContext glContext)
 
    // ImGui::SetWindowSize("Debug Window", ImVec2(240, 240));
    // ImGui::SetWindowPos("Debug Window", ImVec2(static_cast<float>(245), 15));
+
+   _debug_stats = new DebugStats();
 }
 
 void UIManager::DrawGUI()
@@ -36,6 +38,8 @@ void UIManager::DrawGUI()
    ImGui::Text("Random Number: %d", rand() % 100);
 
    ImGui::End();
+
+   _onGUIDraw.Invoke(ImGui::GetIO().DeltaTime);
 }
 
 void UIManager::BeginFrame() const

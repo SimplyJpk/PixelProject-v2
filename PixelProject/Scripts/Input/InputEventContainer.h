@@ -42,6 +42,8 @@ public:
             callbackWrapper.callback(event, pressed);
         }
     }
+
+    uint8_t GetListenerCount() const { return _callbacks.size(); }
     
 private:
     std::vector<InputEvent> _callbacks;

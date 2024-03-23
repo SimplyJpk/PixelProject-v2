@@ -12,7 +12,7 @@ struct ConfigFile final : public ISerialize
    short window_size_x = 1280;
    short window_size_y = 720;
 
-   float target_frames_per_second = 60.0f;
+   float target_frames_per_second = 120.0f;
 
    // Number of pixel updates that will run per second, regardless of the target frames per second. (Fixed timestep)
    uint8_t fixed_pixel_updates_per_second = 60;

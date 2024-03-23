@@ -1,5 +1,8 @@
 ﻿#pragma once
 #include "ConfigFile.h"
+#include "Math/Math.h"
+
+#include "Utility/Console.h"
 
 struct GameSettings
 {
@@ -48,6 +51,8 @@ protected:
       target_sand_update_time = 1000.0 / target_sand_updates_per_seconds;
 
       max_sand_updates_per_frame = _config->max_pixel_updates_per_frame;
+
+      INFO_LOG("Settings\n{0}x{1}\n{2} FPS\n{3} Fixed Updates Per Second\n{4} Max Fixed Updates Per Frame", screen_size.x, screen_size.y, target_frames_per_second, target_sand_updates_per_seconds, max_sand_updates_per_frame);
    }
    
 };

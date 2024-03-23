@@ -7,6 +7,8 @@
 #include "Camera/FlyCamera.h"
 
 #include "Config/GameSettings.h"
+#include "UI/Paint/PaintSelector.h"
+#include "World/WorldSimulator.h"
 
 using namespace PixelProject::Input;
 
@@ -15,7 +17,7 @@ class Game
 public:
    ~Game() = default;
 
-   Game(SDL_GLContext* gl_context, SDL_Window* gl_window, std::unique_ptr<GameSettings>& settings);
+   Game(SDL_GLContext* gl_context, SDL_Window* gl_window, std::shared_ptr<GameSettings>& settings);
    bool Initialize();
 
    /// @brief Runs the game loop, this won't return until the application is closed
@@ -36,15 +38,23 @@ protected:
 
    UIManager* _ui_manager;
    InputManager* _input_manager;
-
+   PaintSelector* _paint_selector;
    FlyCamera* _camera;
 
-   double deltaTime = 0.0;
-   double fixedTime = 0.0;
+   WorldSimulator* _world_simulator;
+
+   double _delta_time = 0.0;
+   double _fixed_time = 0.0;
+
+   double _minimum_delta_time = 1000.0 / 60.0;
+   
+   double _fixed_step_step_time = 1000.0 / 60.0;
+   uint8_t _fixed_step_max_steps = 10;
+   
 
 private:
    Game() = default;
    bool _is_running = true;
-   
-   std::unique_ptr<GameSettings> _settings;
+
+   std::shared_ptr<GameSettings> _settings;
 };
