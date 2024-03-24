@@ -228,6 +228,7 @@
         <ClInclude Include="Scripts\Input\InputKeyCodes.h" />
         <ClInclude Include="Scripts\Input\InputManager.h" />
         <ClInclude Include="Scripts\Interfaces\ISerialize.h" />
+        <ClInclude Include="Scripts\Macros\DefaultMemberFunc.h" />
         <ClInclude Include="Scripts\Macros\InlineReturn.h" />
         <ClInclude Include="Scripts\Math\Math.h" />
         <ClInclude Include="Scripts\Math\Vec2\IVec2.h" />
