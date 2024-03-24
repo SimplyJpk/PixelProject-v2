@@ -1,6 +1,6 @@
 ﻿#include "FpsTracker.h"
 
-void FpsTracker::Update(const float delta_time)
+void FpsTracker::Update(const float delta_time) noexcept
 {
     _current_fps = 1.0f / delta_time;
     
@@ -12,7 +12,7 @@ void FpsTracker::Update(const float delta_time)
     _fps_history.push_back(_current_fps);
 }
 
-float FpsTracker::GetMaxFps()
+float FpsTracker::GetMaxFps() noexcept
 {
     for (const float fps : _fps_history)
     {
@@ -22,7 +22,7 @@ float FpsTracker::GetMaxFps()
     return _max_fps;
 }
 
-float FpsTracker::GetMinFPS()
+float FpsTracker::GetMinFPS() noexcept
 {
     for (const float fps : _fps_history)
     {
