@@ -61,9 +61,9 @@ protected:
    // Constexpr helper function, sets the index of the pixel update order, primarily for the constructor
    #define SET_PIXEL_UPDATE_ORDER(index, ...) \
    do { \
-   constexpr WorldDir values[] = { __VA_ARGS__, WorldDir::UNDEFINED, WorldDir::UNDEFINED, \
-   WorldDir::UNDEFINED, WorldDir::UNDEFINED, WorldDir::UNDEFINED, \
-   WorldDir::UNDEFINED, WorldDir::UNDEFINED, WorldDir::UNDEFINED, WorldDir::UNDEFINED }; \
+   constexpr WorldDir values[] = { __VA_ARGS__, WorldDir::Undefined, WorldDir::Undefined, \
+   WorldDir::Undefined, WorldDir::Undefined, WorldDir::Undefined, \
+   WorldDir::Undefined, WorldDir::Undefined, WorldDir::Undefined, WorldDir::Undefined }; \
    for (uint8_t i = 0; i < Chunk::NUM_DIRECTIONS; i++) { \
    _pixel_update_order[index][i] = static_cast<uint8_t>(values[i]); \
    } \

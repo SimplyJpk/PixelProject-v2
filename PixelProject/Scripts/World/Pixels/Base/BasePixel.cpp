@@ -4,11 +4,11 @@ using namespace Chunk;
 
 BasePixel::BasePixel()
 {
-   // Flood all update orders with undefined directions
-   SET_PIXEL_UPDATE_ORDER(0, WorldDir::UNDEFINED);
-   SET_PIXEL_UPDATE_ORDER(1, WorldDir::UNDEFINED);
-   SET_PIXEL_UPDATE_ORDER(2, WorldDir::UNDEFINED);
-   SET_PIXEL_UPDATE_ORDER(3, WorldDir::UNDEFINED);
+   // Flood all update orders with Undefined directions
+   SET_PIXEL_UPDATE_ORDER(0, WorldDir::Undefined);
+   SET_PIXEL_UPDATE_ORDER(1, WorldDir::Undefined);
+   SET_PIXEL_UPDATE_ORDER(2, WorldDir::Undefined);
+   SET_PIXEL_UPDATE_ORDER(3, WorldDir::Undefined);
 }
 
 const std::array<uint8_t, 8>& BasePixel::GetPixelUpdateOrder()

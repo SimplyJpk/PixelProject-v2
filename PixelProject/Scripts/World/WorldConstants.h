@@ -6,8 +6,8 @@
 
 namespace World {
    // Target Size ([15x9~]1080p pixels, 1920x1152), v1 was 8x5 (1024x640)
-   constexpr short SIZE_X = 6;
-   constexpr short SIZE_Y = 3;
+   constexpr short SIZE_X = 2;
+   constexpr short SIZE_Y = 2;
 }
 
 namespace Chunk {
@@ -46,7 +46,7 @@ namespace Chunk {
       SouthWest = 5,
       West = 6,
       NorthWest = 7,
-      UNDEFINED = NUM_DIRECTIONS
+      Undefined = NUM_DIRECTIONS
    };
    static constexpr const IVec2 WORLD_DIR_DIRECTION_VECTORS[] = {
       IVec2{0, -1},    // North
@@ -57,7 +57,7 @@ namespace Chunk {
       IVec2{-1, 1},    // SouthWest
       IVec2{-1, 0},    // West
       IVec2{-1, -1},   // NorthWest
-      IVec2{0, 0}      // UNDEFINED
+      IVec2{0, 0}      // Undefined
    };
 
    static constexpr const char* WORLD_DIR_NAMES[] = {
@@ -98,7 +98,7 @@ namespace Chunk {
       /* 6  0110 */ SouthEast = South | East,
       /* 12 1100 */ SouthWest = South | West,
       /* 9  1001 */ NorthWest = North | West,
-      /* 0  0000 */ UNDEFINED = 0
+      /* 0  0000 */ Undefined = 0
    };
    constexpr uint8_t BORDER_SOUTHERLY_MASK = ChunkPixelBorderMask::South | ChunkPixelBorderMask::SouthEast | ChunkPixelBorderMask::SouthWest;
 
@@ -112,7 +112,7 @@ namespace Chunk {
       ChunkPixelBorderMask::SouthWest,  // SouthWest
       ChunkPixelBorderMask::West,       // West
       ChunkPixelBorderMask::NorthWest,  // NorthWest
-      ChunkPixelBorderMask::UNDEFINED   // UNDEFINED
+      ChunkPixelBorderMask::Undefined   // Undefined
   };
    
    static constexpr ChunkPixelBorderMask WorldDirToChunkBorderMask(const WorldDir world_dir)
@@ -138,9 +138,9 @@ namespace Chunk {
       case ChunkPixelBorderMask::SouthWest: return WorldDir::SouthWest;
       case ChunkPixelBorderMask::West: return WorldDir::West;
       case ChunkPixelBorderMask::NorthWest: return WorldDir::NorthWest;
-      case ChunkPixelBorderMask::UNDEFINED:
+      case ChunkPixelBorderMask::Undefined:
       default:
-         return WorldDir::UNDEFINED;
+         return WorldDir::Undefined;
       }
    }
 
