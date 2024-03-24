@@ -2,6 +2,7 @@
 
 #include <SDL_stdinc.h>
 #include "World/WorldConstants.h"
+#include <array>
 
 /**
  Container Type\n
@@ -32,40 +33,41 @@ class PixelUpdateResult
    };
    
 private:
-   int8_t _results[5] = { 0 };
+   std::array<uint8_t, 5> _results = { 0 };
+   
 public:
 
    // Result
-   inline LogicResult Result() { return static_cast<LogicResult>(_results[0]); }
-   inline constexpr void SetResult(const LogicResult result) { _results[ContainerIndex::Results] = result; }
+   constexpr LogicResult Result() const noexcept { return static_cast<LogicResult>(_results[static_cast<uint8_t>(ContainerIndex::Results)]); }
+   constexpr void SetResult(const LogicResult result) noexcept { _results[static_cast<uint8_t>(ContainerIndex::Results)] = static_cast<uint8_t>(result); }
 
    // Neighbour
-   inline PixelType NeighbourType() { return static_cast<PixelType>(_results[ContainerIndex::NeighbourPixelType]); }
-   inline constexpr void SetNeighbour(const PixelType type) { _results[ContainerIndex::NeighbourPixelType] = static_cast<int8_t>(type); }
+   PixelType NeighbourType() const noexcept { return static_cast<PixelType>(_results[ContainerIndex::NeighbourPixelType]); }
+   constexpr void SetNeighbour(const PixelType type) noexcept { _results[ContainerIndex::NeighbourPixelType] = static_cast<int8_t>(type); }
 
    // Local NewPixel
-   inline PixelType NewLocal() { return static_cast<PixelType>(_results[ContainerIndex::NewSelfType]); }
-   inline void SetLocal(const PixelType type)
+   constexpr PixelType NewLocal() const noexcept { return static_cast<PixelType>(_results[static_cast<uint8_t>(ContainerIndex::NewSelfType)]); }
+   constexpr void SetLocal(const PixelType type) noexcept
    {
-      _results[ContainerIndex::NewSelfType] = static_cast<int8_t>(type);
-      _results[ContainerIndex::Results] = static_cast<int8_t>(LogicResult::FirstReturnPixel);
+      _results[static_cast<uint8_t>(ContainerIndex::NewSelfType)] = static_cast<uint8_t>(type);
+      _results[static_cast<uint8_t>(ContainerIndex::Results)] = static_cast<uint8_t>(LogicResult::FirstReturnPixel);
    }
 
    // Neighbour NewPixel
-   inline PixelType NewNeighbour() { return static_cast<PixelType>(_results[3]); }
-   inline void SetNewNeighbour(const PixelType type)
+   PixelType NewNeighbour() const noexcept { return static_cast<PixelType>(_results[ContainerIndex::NewNeighbourType]); }
+   void SetNewNeighbour(const PixelType type) noexcept
    {
       _results[ContainerIndex::NewNeighbourType] = static_cast<int8_t>(type);
       _results[ContainerIndex::Results] = static_cast<int8_t>(LogicResult::SecondReturnPixel);
    }
 
    // Direction
-   inline WorldDir Dir() { return static_cast<WorldDir>(_results[ContainerIndex::DirectionIndex]); }
-   inline void SetDirection(const WorldDir dir) { _results[ContainerIndex::DirectionIndex] = static_cast<int8_t>(dir); }
+   constexpr WorldDir Dir() const noexcept { return static_cast<WorldDir>(_results[static_cast<uint8_t>(ContainerIndex::DirectionIndex)]); }
+   constexpr void SetDirection(const WorldDir dir) noexcept { _results[static_cast<uint8_t>(ContainerIndex::DirectionIndex)] = static_cast<uint8_t>(dir); }
 
 
    // Set Local & Neighbour Type
-   inline void SetLocalAndNeighbour(const PixelType local, const PixelType neighbour)
+   void SetLocalAndNeighbour(const PixelType local, const PixelType neighbour) noexcept
    {
       _results[ContainerIndex::NewSelfType] = static_cast<int8_t>(local);
       _results[ContainerIndex::NewNeighbourType] = static_cast<int8_t>(neighbour);
@@ -73,6 +75,6 @@ public:
    }
 
    // Simple one liner
-   inline constexpr void Fail() { _results[ContainerIndex::Results] = static_cast<int8_t>(LogicResult::FailedUpdate); }
-   inline constexpr void Pass() { _results[ContainerIndex::Results] = static_cast<int8_t>(LogicResult::SuccessUpdate); }
+   constexpr void Fail() noexcept { _results[static_cast<uint8_t>(ContainerIndex::Results)] = static_cast<uint8_t>(LogicResult::FailedUpdate); }
+   constexpr void Pass() noexcept { _results[static_cast<uint8_t>(ContainerIndex::Results)] = static_cast<uint8_t>(LogicResult::SuccessUpdate); }
 };
