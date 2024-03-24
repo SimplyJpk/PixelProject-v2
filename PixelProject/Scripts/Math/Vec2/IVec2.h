@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Input/InputContainer.h"
+#include "Macros/DefaultMemberFunc.h"
 #include "Macros/InlineReturn.h"
 
 struct IVec2
@@ -8,9 +9,8 @@ struct IVec2
    int x;
    int y;
 
-   IVec2();
-   constexpr IVec2(int x, int y);
-   constexpr IVec2(const short x, const short y) : x(static_cast<int>(x)), y(static_cast<int>(y)) {}
+   explicit constexpr IVec2(const int x = 0, const int y = 0) noexcept : x(x), y(y) {}
+   constexpr IVec2(const short x, const short y) noexcept : x(static_cast<int>(x)), y(static_cast<int>(y)) {}
    
    template <class Archive>
    void serialize(Archive& archive)
@@ -18,14 +18,21 @@ struct IVec2
       archive(x, y);
    }
 
-   #pragma region STATIC_CONSTANTS
+   // Default 'special' member functions
+   DEFAULT_COPY_CONSTRUCTOR(IVec2)
+   DEFAULT_COPY_ASSIGNMENT(IVec2)
+   DEFAULT_MOVE_CONSTRUCTOR(IVec2)
+   DEFAULT_MOVE_ASSIGNMENT(IVec2)
+   DEFAULT_DESTRUCTOR(IVec2)
 
-   static IVec2 Zero() INLINE_RETURN(IVec2(0, 0))
-   static IVec2 One() INLINE_RETURN(IVec2(1, 1))
-   static IVec2 Left() INLINE_RETURN(IVec2(-1, 0))
-   static IVec2 Right() INLINE_RETURN(IVec2(1, 0))
-   static IVec2 Up() INLINE_RETURN(IVec2(0, 1))
-   static IVec2 Down() INLINE_RETURN(IVec2(0, -1))
+   #pragma region STATIC_CONSTANTS
+   
+   STATIC_CONST_INLINE_NOEXCEPT(IVec2, Zero, IVec2(0, 0))
+   STATIC_CONST_INLINE_NOEXCEPT(IVec2, One, IVec2(1, 1))
+   STATIC_CONST_INLINE_NOEXCEPT(IVec2, Left, IVec2(-1, 0))
+   STATIC_CONST_INLINE_NOEXCEPT(IVec2, Right, IVec2(1, 0))
+   STATIC_CONST_INLINE_NOEXCEPT(IVec2, Up, IVec2(0, 1))
+   STATIC_CONST_INLINE_NOEXCEPT(IVec2, Down, IVec2(0, -1))
 
 #pragma endregion STATIC_CONSTANTS
 
@@ -33,11 +40,14 @@ struct IVec2
 
    IVec2 operator+(const IVec2& rhs) const;
    IVec2 operator-(const IVec2& rhs) const;
-
-   IVec2& operator =(const IVec2 other);
+   
    IVec2& operator+=(const IVec2& vec2);
    IVec2& operator-=(const IVec2& vec2);
    bool operator==(const IVec2& vec2) const;
+
+   // Scalar Operations
+   IVec2 operator*(int scalar) const;
+   IVec2 operator/(int scalar) const;
 
 #pragma endregion OPPERATOR_OVERLOADS
 
@@ -47,7 +57,8 @@ struct IVec2
    void Normalize();
    
    float GetMagnitude() const;
-
+   float GetMagnitudeSquared() const;
+   
 #pragma endregion FUNCTIONS
 };
 
