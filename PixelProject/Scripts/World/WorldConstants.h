@@ -59,23 +59,22 @@ namespace Chunk {
       IVec2{-1, -1},   // NorthWest
       IVec2{0, 0}      // UNDEFINED
    };
-   
-   // TODO : (James) Remove later
-   static constexpr std::string GetWorldDirName(const WorldDir world_dir)
+
+   static constexpr const char* WORLD_DIR_NAMES[] = {
+      "North",      // North
+      "NorthEast",  // NorthEast
+      "East",       // East
+      "SouthEast",  // SouthEast
+      "South",      // South
+      "SouthWest",  // SouthWest
+      "West",       // West
+      "NorthWest",  // NorthWest
+      "Undefined"   // Undefined
+  };
+
+   static constexpr const char* GetWorldDirName(const WorldDir world_dir)
    {
-      switch (world_dir)
-      {
-      case WorldDir::North: return "North";
-      case WorldDir::NorthEast: return "NorthEast";
-      case WorldDir::East: return "East";
-      case WorldDir::SouthEast: return "SouthEast";
-      case WorldDir::South: return "South";
-      case WorldDir::SouthWest: return "SouthWest";
-      case WorldDir::West: return "West";
-      case WorldDir::NorthWest: return "NorthWest";
-      case WorldDir::UNDEFINED:
-      default: return "UNDEFINED";
-      }
+      return WORLD_DIR_NAMES[static_cast<uint8_t>(world_dir)];
    }
 
    static constexpr IVec2 GetDirVector(const WorldDir world_dir)
