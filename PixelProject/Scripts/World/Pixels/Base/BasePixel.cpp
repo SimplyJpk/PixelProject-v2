@@ -48,6 +48,7 @@ void BasePixel::SetPixelName(const char* const name)
 
 Uint32 BasePixel::GetRandomColour()
 {
+   // TODO : (James) Consider adding a "buffer" and iterating through that instead of RNG here which is kinda slow, and pointless for (2-4 values)
    return type_colours[distribution(rand_engine)];
 }
 
