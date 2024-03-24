@@ -48,6 +48,18 @@ namespace Chunk {
       NorthWest = 7,
       UNDEFINED = NUM_DIRECTIONS
    };
+   static constexpr const IVec2 WORLD_DIR_DIRECTION_VECTORS[] = {
+      IVec2{0, -1},    // North
+      IVec2{1, -1},    // NorthEast
+      IVec2{1, 0},     // East
+      IVec2{1, 1},     // SouthEast
+      IVec2{0, 1},     // South
+      IVec2{-1, 1},    // SouthWest
+      IVec2{-1, 0},    // West
+      IVec2{-1, -1},   // NorthWest
+      IVec2{0, 0}      // UNDEFINED
+   };
+   
    // TODO : (James) Remove later
    static constexpr std::string GetWorldDirName(const WorldDir world_dir)
    {
@@ -66,27 +78,16 @@ namespace Chunk {
       }
    }
 
-   static constexpr IVec2 GetDirVector(const int world_dir_index)
-   {
-      switch (world_dir_index)
-      {
-      case 0: return {0, -1};
-      case 1: return {1, -1};
-      case 2: return {1, 0};
-      case 3: return {1, 1};
-      case 4: return {0, 1};
-      case 5: return {-1, 1};
-      case 6: return {-1, 0};
-      case 7: return {-1, -1};
-      default: return {0, 0};
-      }
+   static constexpr IVec2 GetDirVector(const WorldDir world_dir)
+   {      
+      return WORLD_DIR_DIRECTION_VECTORS[static_cast<uint8_t>(world_dir)];
    }
    
    static constexpr uint8_t GetDirectionIndex(const WorldDir direction)
    {
       return static_cast<uint8_t>(direction);
    }
-
+   
    // Mask to be used in identifying if pixels are on the edge of a chunk
    enum ChunkPixelBorderMask : uint8_t
    {
@@ -100,22 +101,31 @@ namespace Chunk {
       /* 9  1001 */ NorthWest = North | West,
       /* 0  0000 */ UNDEFINED = 0
    };
+   constexpr uint8_t BORDER_SOUTHERLY_MASK = ChunkPixelBorderMask::South | ChunkPixelBorderMask::SouthEast | ChunkPixelBorderMask::SouthWest;
 
-   static constexpr uint8_t WorldDirToChunkBorderMask(const WorldDir world_dir)
+   static constexpr ChunkPixelBorderMask WORLD_DIR_TO_BORDER_MASK[] =
    {
-      switch (world_dir)
-      {
-      case WorldDir::North: return ChunkPixelBorderMask::North;
-      case WorldDir::NorthEast: return ChunkPixelBorderMask::NorthEast;
-      case WorldDir::East: return ChunkPixelBorderMask::East;
-      case WorldDir::SouthEast: return ChunkPixelBorderMask::SouthEast;
-      case WorldDir::South: return ChunkPixelBorderMask::South;
-      case WorldDir::SouthWest: return ChunkPixelBorderMask::SouthWest;
-      case WorldDir::West: return ChunkPixelBorderMask::West;
-      case WorldDir::NorthWest: return ChunkPixelBorderMask::NorthWest;
-      default: return ChunkPixelBorderMask::UNDEFINED;
-      }
+      ChunkPixelBorderMask::North,      // North
+      ChunkPixelBorderMask::NorthEast,  // NorthEast
+      ChunkPixelBorderMask::East,       // East
+      ChunkPixelBorderMask::SouthEast,  // SouthEast
+      ChunkPixelBorderMask::South,      // South
+      ChunkPixelBorderMask::SouthWest,  // SouthWest
+      ChunkPixelBorderMask::West,       // West
+      ChunkPixelBorderMask::NorthWest,  // NorthWest
+      ChunkPixelBorderMask::UNDEFINED   // UNDEFINED
+  };
+   
+   static constexpr ChunkPixelBorderMask WorldDirToChunkBorderMask(const WorldDir world_dir)
+   {
+      return WORLD_DIR_TO_BORDER_MASK[static_cast<uint8_t>(world_dir)];
    }
+
+   static constexpr bool IsWorldDirSoutherly(const WorldDir world_dir)
+   {
+      const ChunkPixelBorderMask chunk_border_mask = static_cast<ChunkPixelBorderMask>(WorldDirToChunkBorderMask(world_dir));
+      return (chunk_border_mask & BORDER_SOUTHERLY_MASK) != 0;
+   } 
 
    static constexpr WorldDir ChunkBorderMaskToWorldDir(const ChunkPixelBorderMask chunk_border_mask)
    {
@@ -129,7 +139,9 @@ namespace Chunk {
       case ChunkPixelBorderMask::SouthWest: return WorldDir::SouthWest;
       case ChunkPixelBorderMask::West: return WorldDir::West;
       case ChunkPixelBorderMask::NorthWest: return WorldDir::NorthWest;
-      default: return WorldDir::UNDEFINED;
+      case ChunkPixelBorderMask::UNDEFINED:
+      default:
+         return WorldDir::UNDEFINED;
       }
    }
 
