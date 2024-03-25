@@ -48,7 +48,7 @@ public:
             switch (data.NeighbourType())
             {
             case PixelType::Space:
-               rand() % 2 == 0 ? data.Pass() : data.Fail();
+               _rng() % 2 == 0 ? data.Pass() : data.Fail();
                return;
                
             // case PixelType::Oil:
@@ -56,7 +56,7 @@ public:
             //    return;
 
             case PixelType::Wood:
-               if (rand() % 10 == 0)
+               if (_rng() % 10 == 0)
                {
                   data.SetLocalAndNeighbour(PixelType::Fire, PixelType::Fire);
                   return;

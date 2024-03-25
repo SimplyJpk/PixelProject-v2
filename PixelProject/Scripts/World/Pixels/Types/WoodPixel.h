@@ -26,10 +26,5 @@ public:
       
       // update_function = static_cast<UpdateFunction>(&WoodPixel::PixelUpdate);
    }
-
-   // void PixelUpdate(PixelUpdateResult& data)
-   // {
-   //    data.Fail();
-   // }
    
 };

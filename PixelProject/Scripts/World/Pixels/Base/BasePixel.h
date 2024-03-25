@@ -7,6 +7,7 @@
 #include <random>
 
 #include "PixelUpdateResult.h"
+#include "Utility/XorShift.h"
 #include "World/WorldConstants.h"
 
 class BasePixel
@@ -51,6 +52,8 @@ public:
    }
 
 protected:
+   XorShift _rng;
+   
    uint8_t _chunk_order_counter = 0;
    uint8_t _pixel_update_order_count = 0;
    std::array<std::array<uint8_t, Chunk::NUM_DIRECTIONS>, Pixel::MAX_UPDATE_ORDER_COUNT> _pixel_update_order;

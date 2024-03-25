@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "Config/ConfigFile.h"
 #include "World/Pixels/Base/BasePixel.h"
 
 using namespace Chunk;
@@ -43,11 +44,15 @@ public:
                data.Pass();
                return;
             case PixelType::Water:
-               (rand() % 3 == 0 ? data.Pass() : data.Fail());
+               (_rng() % 3 == 0 ? data.Pass() : data.Fail());
                return;
+            default:
+               break;
             }
             return;
          }
+      default:
+         break;
       }
       data.Fail();
    }
