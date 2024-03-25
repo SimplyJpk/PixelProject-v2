@@ -248,6 +248,7 @@
         <ClInclude Include="Scripts\Utility\BitWise.h" />
         <ClInclude Include="Scripts\Utility\Console.h" />
         <ClInclude Include="Scripts\Utility\FileIO.h" />
+        <ClInclude Include="Scripts\Utility\XorShift.h" />
         <ClInclude Include="Scripts\World\Chunk\ChunkSupport.h" />
         <ClInclude Include="Scripts\World\Chunk\WorldChunk.h" />
         <ClInclude Include="Scripts\World\PixelMask.h" />
@@ -284,7 +285,7 @@
         <Image Include="textures\brick.png" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Scripts\System\formatter\" />
+      <Folder Include="Scripts\System\" />
     </ItemGroup>
     <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
     <ImportGroup Label="ExtensionTargets">
