@@ -35,7 +35,42 @@ void UIManager::DrawGUI()
 {
    ImGui::Begin("Debug Window");
 
-   ImGui::Text("Random Number: %d", rand() % 100);
+   static int unique_values[10] = { 0 };
+   const auto random_value = _rng() % 10;
+
+   unique_values[random_value]++;
+   
+   ImGui::Text("Random Number 0-9: %d", random_value);
+   // count standard deviation
+   float sum = 0;
+   for (int i = 0; i < 10; i++)
+   {
+      sum += unique_values[i];
+   }
+   const float mean = sum / 10;
+   ImGui::Text("Mean: %f", mean);
+   ImGui::Text("Standard Deviation: ");
+   float standard_deviation = 0;
+   int largest = 0;
+   int smallest = int(1e9);
+   for (int i = 0; i < 10; i++)
+   {
+      standard_deviation += (unique_values[i] - mean) * (unique_values[i] - mean);
+      if (unique_values[i] > largest)
+      {
+         largest = unique_values[i];
+      }
+      if (unique_values[i] < smallest)
+      {
+         smallest = unique_values[i];
+      }
+   }
+   standard_deviation = sqrt(standard_deviation / 10);
+   ImGui::Text("%f", standard_deviation);
+   ImGui::Text("Largest: %d", largest);
+   ImGui::Text("Smallest: %d", smallest);
+   ImGui::Text("Range: %d", largest - smallest);
+   
 
    ImGui::End();
 

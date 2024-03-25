@@ -4,6 +4,7 @@
 #include "Core/Events/Delegate.h"
 
 #include "Debug/DebugStats.h"
+#include "Utility/XorShift.h"
 
 class UIManager
 {
@@ -25,6 +26,8 @@ public:
    void EndFrame();
 
 protected:
+   XorShift _rng;
+   
    SDL_Window* _window = nullptr;
    Delegate<float> _onGUIDraw;
 
