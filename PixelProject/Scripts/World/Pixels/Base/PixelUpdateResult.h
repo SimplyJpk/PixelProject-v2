@@ -71,7 +71,7 @@ public:
    {
       _results[ContainerIndex::NewSelfType] = static_cast<int8_t>(local);
       _results[ContainerIndex::NewNeighbourType] = static_cast<int8_t>(neighbour);
-      _results[ContainerIndex::DirectionIndex] = static_cast<int8_t>(LogicResult::DualReturnPixel);
+      _results[ContainerIndex::Results] = static_cast<int8_t>(LogicResult::DualReturnPixel);
    }
 
    // Simple one liner
