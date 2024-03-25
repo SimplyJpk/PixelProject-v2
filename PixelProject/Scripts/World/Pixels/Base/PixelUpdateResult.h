@@ -39,11 +39,17 @@ public:
 
    // Result
    constexpr LogicResult Result() const noexcept { return static_cast<LogicResult>(_results[static_cast<uint8_t>(ContainerIndex::Results)]); }
-   constexpr void SetResult(const LogicResult result) noexcept { _results[static_cast<uint8_t>(ContainerIndex::Results)] = static_cast<uint8_t>(result); }
+   constexpr void SetResult(const LogicResult result) noexcept
+   {
+      _results[static_cast<uint8_t>(ContainerIndex::Results)] = static_cast<uint8_t>(result);
+   }
 
    // Neighbour
    PixelType NeighbourType() const noexcept { return static_cast<PixelType>(_results[ContainerIndex::NeighbourPixelType]); }
-   constexpr void SetNeighbour(const PixelType type) noexcept { _results[ContainerIndex::NeighbourPixelType] = static_cast<int8_t>(type); }
+   constexpr void SetNeighbour(const PixelType type) noexcept
+   {
+      _results[ContainerIndex::NeighbourPixelType] = static_cast<int8_t>(type);
+   }
 
    // Local NewPixel
    constexpr PixelType NewLocal() const noexcept { return static_cast<PixelType>(_results[static_cast<uint8_t>(ContainerIndex::NewSelfType)]); }
@@ -63,7 +69,10 @@ public:
 
    // Direction
    constexpr WorldDir Dir() const noexcept { return static_cast<WorldDir>(_results[static_cast<uint8_t>(ContainerIndex::DirectionIndex)]); }
-   constexpr void SetDirection(const WorldDir dir) noexcept { _results[static_cast<uint8_t>(ContainerIndex::DirectionIndex)] = static_cast<uint8_t>(dir); }
+   constexpr void SetDirection(const WorldDir dir) noexcept
+   {
+      _results[static_cast<uint8_t>(ContainerIndex::DirectionIndex)] = static_cast<uint8_t>(dir);
+   }
 
 
    // Set Local & Neighbour Type
@@ -75,6 +84,12 @@ public:
    }
 
    // Simple one liner
-   constexpr void Fail() noexcept { _results[static_cast<uint8_t>(ContainerIndex::Results)] = static_cast<uint8_t>(LogicResult::FailedUpdate); }
-   constexpr void Pass() noexcept { _results[static_cast<uint8_t>(ContainerIndex::Results)] = static_cast<uint8_t>(LogicResult::SuccessUpdate); }
+   constexpr void Fail() noexcept
+   {
+      _results[static_cast<uint8_t>(ContainerIndex::Results)] = static_cast<uint8_t>(LogicResult::FailedUpdate);
+   }
+   constexpr void Pass() noexcept
+   {
+      _results[static_cast<uint8_t>(ContainerIndex::Results)] = static_cast<uint8_t>(LogicResult::SuccessUpdate);
+   }
 };
