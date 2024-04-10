@@ -23,6 +23,12 @@
 
 using namespace boost;
 
+enum class WorldSimuatorState : uint8_t
+{
+   Paused,
+   Running,
+};
+
 class WorldSimulator
 {
 public:
@@ -38,6 +44,12 @@ public:
    void Draw(const Camera* camera);
 
    uint8_t current_frame_id = 0;
+
+   void SaveWorld();
+   void LoadWorld();
+
+   void SetSimState(const WorldSimuatorState state) { _sim_state = state; }
+   WorldSimuatorState GetSimState() const { return _sim_state; }
    
 protected:
    void UpdateChunk(const IVec2& chunk_index);
@@ -67,6 +79,8 @@ protected:
        {Chunk::ARRAY_ENTRY_INDEX, Chunk::ARRAY_MAX_Y, Chunk::INCREMENT_POSITIVE},
        {Chunk::ARRAY_MAX_Y, Chunk::ARRAY_ENTRY_INDEX, Chunk::INCREMENT_NEGATIVE}
     };
+
+   WorldSimuatorState _sim_state = WorldSimuatorState::Running;
    
 private:
    std::atomic<int> _thread_pool_tasks = 0;

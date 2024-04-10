@@ -2,6 +2,7 @@
 
 #include <glm/vec2.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <ranges>
 
 #include "Pixels/WorldDataHandler.h"
 #include "Pixels/Base/BasePixel.h"
@@ -79,11 +80,35 @@ WorldSimulator::WorldSimulator(Shader* draw_shader, const std::shared_ptr<GameSe
             Pen(pos, PEN_SIZE, true);
          }
       });
+   
+   InputManager::GetInstance()->AddKeyListener(KeyCode::K, "SaveWorld", [this](SDL_Event& event, bool state)
+   {
+      if (state)
+         SaveWorld();
+   });
+
+   InputManager::GetInstance()->AddKeyListener(KeyCode::L, "LoadWorld", [this](SDL_Event& event, bool state)
+   {
+      if (state)
+      {
+         if (_sim_state == WorldSimuatorState::Paused)
+            return;
+         SetSimState(WorldSimuatorState::Paused);
+         LoadWorld();
+      }
+      else
+      {
+         SetSimState(WorldSimuatorState::Running);
+      }
+   });
 }
 
 void WorldSimulator::FixedUpdate()
 {
    current_frame_id++;
+
+   if (_sim_state == WorldSimuatorState::Paused)
+      return;
 
    std::unique_lock<std::mutex> lock(_chunk_mutex);
    // Update order of update for chunks
@@ -423,5 +448,21 @@ void WorldSimulator::Pen(const IVec2& position, int size, const bool override_pi
             _chunks[IVec2(xFloor, yFloor)]->pixel_data[pixelIndex] = pixelType->GetNewPixel();
          }
       }
+   }
+}
+
+void WorldSimulator::SaveWorld()
+{
+   for (auto& chunk : _chunks | std::views::values)
+   {
+      chunk->StartSave();
+   }
+}
+
+void WorldSimulator::LoadWorld()
+{
+   for (const auto& chunk : _chunks | std::views::values)
+   {
+      chunk->StartLoad();
    }
 }
