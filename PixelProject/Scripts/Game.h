@@ -7,12 +7,14 @@
 #include "Camera/FlyCamera.h"
 
 #include "Config/GameSettings.h"
+#include "UI/IDrawGUI.h"
 #include "UI/Paint/PaintSelector.h"
+#include "Utility/Time/TimeTracker.h"
 #include "World/WorldSimulator.h"
 
 using namespace PixelProject::Input;
 
-class Game
+class Game : IDrawGUI
 {
 public:
    ~Game() = default;
@@ -57,4 +59,7 @@ private:
    bool _is_running = true;
 
    std::shared_ptr<GameSettings> _settings;
+   TimeTracker<TimeFormat::Milli> _sand_time_tracker = TimeTracker<TimeFormat::Milli>(30);
+
+   virtual void OnDrawGUI(float delta_time) override;
 };

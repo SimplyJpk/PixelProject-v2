@@ -21,6 +21,10 @@
 
 #include <array>
 
+#include "UI/IDrawGUI.h"
+#include "Utility/XorShift.h"
+#include "Utility/Time/TimeWatcher.h"
+
 using namespace boost;
 
 enum class WorldSimuatorState : uint8_t
@@ -29,7 +33,7 @@ enum class WorldSimuatorState : uint8_t
    Running,
 };
 
-class WorldSimulator
+class WorldSimulator : IDrawGUI
 {
 public:
    WorldSimulator(Shader* draw_shader, const std::shared_ptr<GameSettings>& game_settings);
@@ -81,6 +85,9 @@ protected:
     };
 
    WorldSimuatorState _sim_state = WorldSimuatorState::Running;
+
+protected:
+   virtual void OnDrawGUI(float delta_time) override;
    
 private:
    std::atomic<int> _thread_pool_tasks = 0;
@@ -90,5 +97,8 @@ private:
 
    std::mutex _chunk_mutex;
    std::condition_variable _chunk_condition_variable;
-   
+
+   TimeWatcher<TimeFormat::Micro, IVec2> _time_watcher;
+
+   XorShift _rng;
 };

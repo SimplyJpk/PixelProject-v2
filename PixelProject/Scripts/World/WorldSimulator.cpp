@@ -13,6 +13,7 @@
 
 #include "Input/InputManager.h"
 #include "UI/Paint/PaintSelector.h"
+#include "implot/implot.h"
 
 #include "Debug/DebugAssertion.h"
 
@@ -21,7 +22,7 @@ WorldSimulator::WorldSimulator(Shader* draw_shader, const std::shared_ptr<GameSe
 {
    _draw_shader = draw_shader;
    _vbo = new VertexBufferObject(VBOShape::Square);
-
+   
    // Initialize chunks
    _chunks.reserve(WORLD_SIZE.x * WORLD_SIZE.y);
    for (int x = 0; x < WORLD_SIZE.x; x++)
@@ -31,6 +32,7 @@ WorldSimulator::WorldSimulator(Shader* draw_shader, const std::shared_ptr<GameSe
          auto chunkIndex = IVec2(x, y);
          auto chunk = new WorldChunk(chunkIndex);
 
+         _time_watcher.AddTimeTracker(chunkIndex);
          _chunks.insert({chunkIndex, chunk});
       }
    }
@@ -66,7 +68,7 @@ WorldSimulator::WorldSimulator(Shader* draw_shader, const std::shared_ptr<GameSe
 
    for (int i = 0; i < Chunk::TOTAL_SIZE; i++)
    {
-      _map_noise_texture_data[i] = rand() % MAX_COLOUR_COUNT;
+      _map_noise_texture_data[i] = _rng() % MAX_COLOUR_COUNT;
    }
    _noise_texture->UpdateTextureData(_map_noise_texture_data);
 
@@ -109,7 +111,7 @@ void WorldSimulator::FixedUpdate()
 
    if (_sim_state == WorldSimuatorState::Paused)
       return;
-
+   
    std::unique_lock<std::mutex> lock(_chunk_mutex);
    // Update order of update for chunks
    _current_update_order = (_current_update_order + 1) % 2;
@@ -136,9 +138,13 @@ void WorldSimulator::UpdateChunk(const IVec2& chunk_index)
 
    asio::post(_thread_pool, [this, chunk_index]()
    {
+      auto chunkTimer = _time_watcher[chunk_index];
+      chunkTimer->Start();
+      
       // Helpers
       const auto& worldData = WorldDataHandler::GetInstance();
-
+      
+      
       // Chunk
       auto& localChunk = _chunks[chunk_index];
       auto* localPixels = localChunk->pixel_data;
@@ -314,6 +320,8 @@ void WorldSimulator::UpdateChunk(const IVec2& chunk_index)
          }
       }
 
+      chunkTimer->StopWithoutReturn();
+      
       --_thread_pool_tasks;
       if (_thread_pool_tasks == 0)
          _chunk_condition_variable.notify_one();
@@ -332,7 +340,7 @@ void WorldSimulator::Draw(const Camera* camera)
    // TODO : Remove
    for (int i = 0; i < Chunk::TOTAL_SIZE; i++)
    {
-      _map_noise_texture_data[i] = rand() % MAX_COLOUR_COUNT;
+      _map_noise_texture_data[i] = _rng() % MAX_COLOUR_COUNT;
    }
    _noise_texture->UpdateTextureData(_map_noise_texture_data);
 
@@ -346,14 +354,14 @@ void WorldSimulator::Draw(const Camera* camera)
 
    glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(camera->GetProjectionMatrix()));
 
+   // TODO : (James) Debugging, Remove or improve this (Zoom in)
+   const float extra_scale = InputManager::GetInstance()->GetKeyState(KeyCode::P) ? 6.0f : 1.0f;
+   
    int chunksDrawn = 0;
    for (int xVal = 0; xVal < World::SIZE_X; xVal++)
    {
       for (int yVal = 0; yVal < World::SIZE_Y; yVal++)
       {
-         if (xVal < 0 || yVal < 0 || xVal >= World::SIZE_X || yVal >= World::SIZE_Y)
-            continue;
-
          auto worldChunk = _chunks.find(IVec2(xVal, yVal));
          // Chunk doesn't exist, we don't render
          if (worldChunk == _chunks.end())
@@ -362,20 +370,12 @@ void WorldSimulator::Draw(const Camera* camera)
          _map_texture->UpdateTextureData(&worldChunk->second->pixel_data);
 
          auto model = glm::mat4(1.0f);
-
-
-         static float extraScale = 1.0f;
-         // TODO : (James) Debugging, Remove or improve this (Zoom in)
-         if (InputManager::GetInstance()->GetKeyState(KeyCode::P))
-            extraScale = 6.0f;
-         else
-            extraScale = 1.0f;
-
+         
          // Set model position
          auto modelPosition = glm::vec3(
-            (((xVal) + 1) * Chunk::SIZE_X * extraScale) - (Chunk::HALF_X * extraScale) + xVal,
+            (((xVal) + 1) * Chunk::SIZE_X * extra_scale) - (Chunk::HALF_X * extra_scale) + xVal,
             // + xVal is for fake grid TODO make a proper visual grid
-            (((yVal) + 1) * Chunk::SIZE_Y * extraScale) - (Chunk::HALF_Y * extraScale) + yVal,
+            (((yVal) + 1) * Chunk::SIZE_Y * extra_scale) - (Chunk::HALF_Y * extra_scale) + yVal,
             1.0f
          );
 
@@ -388,7 +388,7 @@ void WorldSimulator::Draw(const Camera* camera)
 
          model = glm::translate(model, modelPosition);
 
-         model = glm::scale(model, glm::vec3(Chunk::SIZE_X * extraScale, Chunk::SIZE_Y * extraScale, 1.0f));
+         model = glm::scale(model, glm::vec3(Chunk::SIZE_X * extra_scale, Chunk::SIZE_Y * extra_scale, 1.0f));
 
          glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
@@ -409,7 +409,7 @@ void WorldSimulator::FillPixelUpdateDirections()
    }
 }
 
-void WorldSimulator::Pen(const IVec2& position, int size, const bool override_pixels)
+void WorldSimulator::Pen(const IVec2& position, const int size, const bool override_pixels)
 {
    const auto halfSize = size / 2;
    const auto halfSizeVec = IVec2(halfSize, halfSize);
@@ -453,7 +453,7 @@ void WorldSimulator::Pen(const IVec2& position, int size, const bool override_pi
 
 void WorldSimulator::SaveWorld()
 {
-   for (auto& chunk : _chunks | std::views::values)
+   for (const auto& chunk : _chunks | std::views::values)
    {
       chunk->StartSave();
    }
@@ -465,4 +465,41 @@ void WorldSimulator::LoadWorld()
    {
       chunk->StartLoad();
    }
+}
+
+void WorldSimulator::OnDrawGUI(float delta_time)
+{
+   ImGui::Begin("World Simulator");
+
+   if (ImPlot::BeginPlot("Chunk Updates"))
+   {
+      // array of random ImVec4 colours to use for plots
+      static ImVec4 colours[30];
+      if (colours[0].x == 0)
+      {
+         for (int i = 0; i < 30; i++) {
+            colours[i] = ImVec4((_rng() % 256) / 255.0f, (_rng() % 256) / 255.0f, (_rng() % 256) / 255.0f, 0.75f);
+         }
+      }
+      
+      const auto chunkTimerHistory = _time_watcher[IVec2(0, 0)]->GetHistory();
+      const auto maxHistory = chunkTimerHistory.size();
+      ImPlot::SetupAxes("Chunk Update","Time in Microseconds",ImPlotAxisFlags_RangeFit|ImPlotAxisFlags_Lock,ImPlotAxisFlags_RangeFit|ImPlotAxisFlags_AutoFit);
+      // Set x limits, but keep y limits auto-fitting
+      ImPlot::SetupAxesLimits(0, maxHistory, 0, 1000);
+      
+      for (const auto& [chunkIndex, timer] : _time_watcher.GetTimeTrackerCollection())
+      {
+         const int colourIndex = (chunkIndex.x + (chunkIndex.y * WORLD_SIZE.x)) % 30;
+         ImPlot::PushStyleColor(ImPlotCol_Line, colours[colourIndex]);
+         
+         const auto& history = timer.GetHistory();
+         const auto chunk_index_str = std::format("Chunk: ({0}, {1})", chunkIndex.x, chunkIndex.y);
+         ImPlot::PlotLine<float>(chunk_index_str.c_str(), history.data(), maxHistory);
+      }
+
+      ImPlot::EndPlot();
+   }
+   
+   ImGui::End();
 }

@@ -193,6 +193,9 @@
         <ClCompile Include="Scripts\UI\Paint\PaintSelector.cpp" />
         <ClCompile Include="Scripts\UI\UIManager.cpp" />
         <ClCompile Include="Scripts\Utility\Console.cpp" />
+        <ClCompile Include="Scripts\Utility\Time\Timer.cpp" />
+        <ClCompile Include="Scripts\Utility\Time\TimeTracker.cpp" />
+        <ClCompile Include="Scripts\Utility\Time\TimeWatcher.cpp" />
         <ClCompile Include="Scripts\World\Chunk\WorldChunk.cpp" />
         <ClCompile Include="Scripts\World\Pixels\Base\BasePixel.cpp" />
         <ClCompile Include="Scripts\World\Pixels\Base\PixelUpdateResult.cpp" />
@@ -252,6 +255,9 @@
         <ClInclude Include="Scripts\Utility\BitWise.h" />
         <ClInclude Include="Scripts\Utility\Console.h" />
         <ClInclude Include="Scripts\Utility\FileIO.h" />
+        <ClInclude Include="Scripts\Utility\Time\Timer.h" />
+        <ClInclude Include="Scripts\Utility\Time\TimeTracker.h" />
+        <ClInclude Include="Scripts\Utility\Time\TimeWatcher.h" />
         <ClInclude Include="Scripts\Utility\XorShift.h" />
         <ClInclude Include="Scripts\World\Chunk\ChunkSupport.h" />
         <ClInclude Include="Scripts\World\Chunk\WorldChunk.h" />

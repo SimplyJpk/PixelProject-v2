@@ -3,6 +3,7 @@
 #include <cstdlib>
 
 #include "imgui.h"
+#include "implot/implot.h"
 #include "backends/imgui_impl_sdl.h"
 #include "backends/imgui_impl_opengl3.h"
 
@@ -12,6 +13,7 @@ void UIManager::Init(SDL_Window* window, SDL_GLContext glContext)
 
    IMGUI_CHECKVERSION();
    ImGui::CreateContext();
+   ImPlot::CreateContext();
    ImGuiIO& io = ImGui::GetIO();
    (void)io;
    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
@@ -95,5 +97,6 @@ UIManager::~UIManager()
 {
    ImGui_ImplOpenGL3_Shutdown();
    ImGui_ImplSDL2_Shutdown();
+   ImPlot::DestroyContext();
    ImGui::DestroyContext();
 }
